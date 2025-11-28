@@ -220,7 +220,7 @@ function drawerInit() {
   };
 
   // Abrir drawer desde cualquier trigger
-  triggers.forEach(btn => btn.addEventListener("click", openDrawer));
+  triggers.forEach((btn) => btn.addEventListener("click", openDrawer));
 
   // Cerrar drawer
   closeBtn.addEventListener("click", closeDrawer);
@@ -229,6 +229,54 @@ function drawerInit() {
   // Cerrar con ESC
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeDrawer();
+  });
+}
+
+function modalTeam() {
+  const openModal = document.getElementById("openModal");
+  const closeModal = document.getElementById("closeModal");
+  const overlay = document.getElementById("modalOverlay");
+  const modalContent = document.getElementById("modalContent");
+
+  // Abrir modal
+  openModal.addEventListener("click", () => {
+    // Mostrar elementos
+    overlay.classList.remove("hidden");
+    modalContent.classList.remove("hidden");
+
+    // Forzar repaint para activar transición
+    requestAnimationFrame(() => {
+      overlay.classList.replace("opacity-0", "opacity-100");
+      modalContent.classList.replace("opacity-0", "opacity-100");
+      modalContent.classList.replace("scale-90", "scale-100");
+    });
+  });
+
+  // Cerrar modal
+  function closeModalFn() {
+    // Animaciones de salida
+    overlay.classList.replace("opacity-100", "opacity-0");
+    modalContent.classList.replace("opacity-100", "opacity-0");
+    modalContent.classList.replace("scale-100", "scale-90");
+
+    // Ocultar elementos tras la transición
+    setTimeout(() => {
+      overlay.classList.add("hidden");
+      modalContent.classList.add("hidden");
+    }, 300); // mismo tiempo que transition-duration
+  }
+
+  // Botón cerrar
+  if (closeModal) {
+    closeModal.addEventListener("click", closeModalFn);
+  }
+
+  // Click en overlay
+  overlay.addEventListener("click", closeModalFn);
+
+  // Tecla ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModalFn();
   });
 }
 

@@ -235,6 +235,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
               </div>
               <img class="picture_team" src="imgs/team/01.png" alt="" />
               <button
+                id="openModal"
                 class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl"
               >
                 <i class="ri-arrow-right-line"></i>
@@ -319,7 +320,9 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <p class="font-medium">Board Chair</p>
               </div>
               <img class="picture_team" src="imgs/team/06.png" alt="" />
-              <button class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
+              <button
+                class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl"
+              >
                 <i class="ri-arrow-right-line"></i>
               </button>
             </div>
@@ -329,7 +332,9 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <p class="font-medium">Secretary</p>
               </div>
               <img class="picture_team" src="imgs/team/07.png" alt="" />
-              <button class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
+              <button
+                class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl"
+              >
                 <i class="ri-arrow-right-line"></i>
               </button>
             </div>
@@ -340,7 +345,9 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <p class="font-medium">Doctor</p>
               </div>
               <img class="picture_team" src="imgs/team/08.png" alt="" />
-              <button class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
+              <button
+                class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl"
+              >
                 <i class="ri-arrow-right-line"></i>
               </button>
             </div>
@@ -350,7 +357,9 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <p class="font-medium">Comunications</p>
               </div>
               <img class="picture_team" src="imgs/team/09.png" alt="" />
-              <button class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
+              <button
+                class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl"
+              >
                 <i class="ri-arrow-right-line"></i>
               </button>
             </div>
@@ -360,7 +369,9 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <p class="font-medium">Board Member</p>
               </div>
               <img class="picture_team" src="imgs/team/10.png" alt="" />
-              <button class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
+              <button
+                class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl"
+              >
                 <i class="ri-arrow-right-line"></i>
               </button>
             </div>
@@ -370,7 +381,9 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <p class="font-medium">Adjunct Board Member</p>
               </div>
               <img class="picture_team" src="imgs/team/11.png" alt="" />
-              <button class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
+              <button
+                class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl"
+              >
                 <i class="ri-arrow-right-line"></i>
               </button>
             </div>
@@ -380,7 +393,9 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <p class="font-medium">Adjunct Board Member</p>
               </div>
               <img class="picture_team" src="imgs/team/12.png" alt="" />
-              <button class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
+              <button
+                class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl"
+              >
                 <i class="ri-arrow-right-line"></i>
               </button>
             </div>
@@ -497,6 +512,72 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
       </div>
     </footer>
 
+    <!-- Overlay -->
+    <div
+      id="modalOverlay"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden transition-opacity duration-300 z-99 opacity-0"
+    ></div>
+
+    <!-- Modal Wrapper -->
+    <div
+      id="modalBox"
+      class="modal__team fixed inset-0 flex items-center justify-center pointer-events-none z-99"
+    >
+      <div
+        id="modalContent"
+        class="w-full max-w-[620px] p-4 scale-90 hidden transition-transform transition-opacity duration-300 pointer-events-auto opacity-0"
+      >
+        <div
+          class="item_team flex-col !items-start !justify-start !gap-0 relative"
+        >
+          <button
+            id="closeModal"
+            class="btn_mini mini_green trans absolute t-0 right-5 z-1 shadow-2xl"
+          >
+            <i class="ri-close-fill"></i>
+          </button>
+          <div class="relative w-full">
+            <div class="names_team">
+              <h2 class="text-3xl font-bold">Pedro López</h2>
+              <p class="font-medium">Executive Director</p>
+            </div>
+            <img class="picture_team" src="imgs/team/01.png" alt="" />
+          </div>
+
+          <div class="info_personal custom-scroll">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptatem assumenda voluptatibus veritatis accusantium, commodi
+              quaerat consequuntur natus tempore. Nostrum commodi dolorum culpa
+              eveniet, ipsum ex excepturi nobis illo mollitia. Repudiandae modi
+              reprehenderit qui, expedita nemo non? Ab nihil, voluptas quasi
+              obcaecati, ex illo ipsum quo ullam accusamus id et eum quos ad?
+              Temporibus dolorem nemo cumque. Nam inventore eaque voluptas
+              assumenda, sunt delectus molestiae, quod ipsa minus nemo molestias
+              veniam dignissimos numquam? Corporis odit placeat, excepturi
+              nesciunt id nulla iste quos dicta obcaecati cumque soluta eum ad
+              eos earum, beatae quo! Vero atque error similique fuga in
+              consequuntur delectus ab.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab sint
+              corrupti, nihil ullam vitae aliquid et harum! Perspiciatis fugit
+              eligendi ab minima reiciendis. Quidem quis quasi fugiat tempora ab
+              error.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Reiciendis inventore neque adipisci, dolores ex omnis maxime est
+              error sit dolore recusandae fugiat deleniti voluptas praesentium.
+              Dicta vitae eveniet dignissimos consequatur cumque non temporibus
+              exercitationem voluptate, laboriosam porro at earum, eos aliquid
+              neque, dolorem provident vero! Quasi debitis in hic tenetur?
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
     <script src="http://zeptojs.com/zepto.min.js"></script>
@@ -507,6 +588,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
       document.addEventListener("DOMContentLoaded", () => {
         isDropdown();
         headerOnScroll();
+        modalTeam();
       });
     </script>
   </body>
