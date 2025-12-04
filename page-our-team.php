@@ -9,7 +9,7 @@ get_header();
     <div class="container_main relative">
       <div
         class="drawer_hero_page"
-        style="background-image: url(imgs/pages/our-team.png)">
+        style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/our-team.png)">
         <div class="box_ttl_hero_page">
           <h2 class="font-extrabold text-5xl mb-6">
             The Heart Behind Our Mission.
@@ -29,7 +29,7 @@ get_header();
       <div
         class="icon_rounded green w-[115px] h-[115px] bottom-[-50px] right-[35px] sm:right-[60px]">
         <img
-          src="imgs/logo-rounded.png"
+          src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
           alt="Vallarta Gay + Community Center" />
       </div>
     </div>
@@ -63,7 +63,7 @@ get_header();
             <h2 class="text-2xl font-bold">Pedro López</h2>
             <p class="font-medium">Executive Director</p>
           </div>
-          <img class="picture_team" src="imgs/team/01.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/01.png" alt="" />
           <button
             id="openModal"
             class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
@@ -76,7 +76,7 @@ get_header();
             <h2 class="text-2xl font-bold">Ashley Hernández Castellon</h2>
             <p class="font-medium">Doctor</p>
           </div>
-          <img class="picture_team" src="imgs/team/02.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/02.png" alt="" />
           <button
             class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -87,7 +87,7 @@ get_header();
             <h2 class="text-2xl font-bold">Fatima Farias Martinez</h2>
             <p class="font-medium">Nurse</p>
           </div>
-          <img class="picture_team" src="imgs/team/03.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/03.png" alt="" />
           <button
             class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -100,7 +100,7 @@ get_header();
               Coordinator of Volunteers and Prevention
             </p>
           </div>
-          <img class="picture_team" src="imgs/team/04.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/04.png" alt="" />
           <button
             class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -111,7 +111,7 @@ get_header();
             <h2 class="text-2xl font-bold">Alberto Díaz de León Jiménez</h2>
             <p class="font-medium">Mtro. Psychologist</p>
           </div>
-          <img class="picture_team" src="imgs/team/05.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/05.png" alt="" />
           <button
             class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -142,7 +142,7 @@ get_header();
             <h2 class="text-2xl font-bold">Don Pickens</h2>
             <p class="font-medium">Board Chair</p>
           </div>
-          <img class="picture_team" src="imgs/team/06.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/06.png" alt="" />
           <button
             class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -153,7 +153,7 @@ get_header();
             <h2 class="text-2xl font-bold">Mike Owens</h2>
             <p class="font-medium">Secretary</p>
           </div>
-          <img class="picture_team" src="imgs/team/07.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/07.png" alt="" />
           <button
             class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -165,7 +165,7 @@ get_header();
             <h2 class="text-2xl font-bold">Matt Karimi</h2>
             <p class="font-medium">Doctor</p>
           </div>
-          <img class="picture_team" src="imgs/team/08.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/08.png" alt="" />
           <button
             class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -176,7 +176,7 @@ get_header();
             <h2 class="text-2xl font-bold">Jet De La Isla</h2>
             <p class="font-medium">Comunications</p>
           </div>
-          <img class="picture_team" src="imgs/team/09.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/09.png" alt="" />
           <button
             class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -187,7 +187,7 @@ get_header();
             <h2 class="text-2xl font-bold">Poncho Davalos</h2>
             <p class="font-medium">Board Member</p>
           </div>
-          <img class="picture_team" src="imgs/team/10.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/10.png" alt="" />
           <button
             class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -198,7 +198,7 @@ get_header();
             <h2 class="text-2xl font-bold">Luis Villavicencio</h2>
             <p class="font-medium">Adjunct Board Member</p>
           </div>
-          <img class="picture_team" src="imgs/team/11.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/11.png" alt="" />
           <button
             class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -209,7 +209,7 @@ get_header();
             <h2 class="text-2xl font-bold">Mitchel Kushner M.D.</h2>
             <p class="font-medium">Adjunct Board Member</p>
           </div>
-          <img class="picture_team" src="imgs/team/12.png" alt="" />
+          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/12.png" alt="" />
           <button
             class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
             <i class="ri-arrow-right-line"></i>
@@ -247,7 +247,7 @@ get_header();
           <h2 class="text-3xl font-bold">Pedro López</h2>
           <p class="font-medium">Executive Director</p>
         </div>
-        <img class="picture_team" src="imgs/team/01.png" alt="" />
+        <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/01.png" alt="" />
       </div>
 
       <div class="info_personal custom-scroll">

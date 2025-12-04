@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -37,10 +37,32 @@
   <header class="wrapper_header trans">
     <div class="h_top font-regular">
       <div class="contain_t flex justify-between items-center">
-        <div class="controls_lang">
-          <button>EN</button>
-          <button>ES</button>
-        </div>
+
+        <?php
+        if (function_exists('pll_the_languages')) {
+
+          $languages = pll_the_languages(array(
+            'show_flags' => 0,
+            'show_names' => 0,
+            'display_names_as' => 'slug',
+            'raw' => 1 // Importantísimo para personalizar
+          ));
+
+          if (!empty($languages)) {
+            echo '<ul class="controls_lang">';
+            foreach ($languages as $lang) {
+
+              $active_class = $lang['current_lang'] ? 'active' : '';
+
+              echo '<li class="' . $active_class . '">
+              <a href="' . esc_url($lang['url']) . '">' . esc_html($lang['slug']) . '</a>
+            </li>';
+            }
+            echo '</ul>';
+          }
+        }
+        ?>
+
         <div class="flex gap-5">
           <span class="flex gap-1 items-center"><i class="text-lg ri-mail-fill"></i>
             <a href="mailto:info@vallartagaycc.org">info@vallartagaycc.org</a></span>
@@ -132,7 +154,7 @@
           <button
             class="btn_movil btn_mini mini_primary trans !h-[2.76rem] !w-[2.75rem]">
             <i class="icon_open block text-xl ri-menu-3-line"></i>
-            <span class="icon_close hidden">X</span>
+            <span class="icon_close hidden"><i class="ri-close-line"></i></span>
           </button>
         </div>
       </div>
@@ -147,7 +169,7 @@
       class="wrapper_drawer fixed top-0 right-0 h-full w-full max-w-[600px] bg-white shadow-2xl translate-x-full transition-transform duration-300 z-[999]">
       <div class="drawer-content">
         <div
-          class="bg_hero_drawer w-full h-[300px]"
+          class="bg_hero_drawer w-full min-h-[215px] sm:min-h-[300px]"
           style="background-image: url(<?php bloginfo('template_url') ?>/imgs/bg_contact_quikly.png)">
           <button
             id="drawer-close"
@@ -159,15 +181,15 @@
             <h4 class="text-xl sm:text-3xl font-bold mb-2">
               Your support strengthens our community
             </h4>
-            <p>
+            <p class="pb-1">
               Your donation helps us promote health, wellness, and empowerment
               within the LGBTQ+ community. We offer tax-deductible receipts in
               Mexico and the U.S. through the Border Philanthropy Partnership.
             </p>
           </div>
         </div>
-        <div class="mx-auto max-w-[460px] mt-12">
-          <h5 class="text-center text-xl mb-20 font-bold">
+        <div class="mx-auto max-w-[460px] mt-6 sm:mt-12 pl-4 pr-4">
+          <h5 class="text-center text-xl mb-12 sm:mb-20 font-bold">
             Please choose the donation option that best fits your needs:
           </h5>
           <div class="box_banderas">
@@ -198,7 +220,7 @@
             </a>
           </div>
 
-          <h5 class="text-center text-xl mt-14 font-bold">
+          <h5 class="text-center text-xl mt-10 sm:mt-14 font-bold">
             Thank you for being part of this movement for inclusion, health,
             and care. 💜
           </h5>

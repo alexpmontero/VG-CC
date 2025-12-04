@@ -13,7 +13,7 @@ get_header();
         <div class="block sm:flex md:block lg:flex gap-6">
           <img
             class="h-13 rounded-md mb-2"
-            src="imgs/bandera-mex.png"
+            src="<?php bloginfo('template_url') ?>/imgs/bandera-mex.png"
             alt="Donate in Mexico" />
           <div class="">
             <h5 class="text-2xl font-semibold">Payment Information</h5>
@@ -52,11 +52,11 @@ get_header();
 
       <div
         class="drawer_picture_in_donate relative"
-        style="background-image: url(imgs/pages/bg_mex.jpg)">
+        style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/bg_mex.jpg)">
         <div
           class="icon_rounded yellow w-[115px] h-[115px] bottom-[-50px] right-[30px]">
           <img
-            src="imgs/logo-rounded.png"
+            src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
             alt="Vallarta Gay + Community Center" />
         </div>
       </div>

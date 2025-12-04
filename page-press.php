@@ -9,7 +9,7 @@ get_header();
     <div class="container_main relative">
       <div
         class="drawer_hero_page in_press"
-        style="background-image: url(imgs/pages/bg_press.jpg)">
+        style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/bg_press.jpg)">
         <div class="box_ttl_hero_page">
           <h3 class="font-extrabold text-xl md:text-2xl lg:text-4xl mb-4">
             370 Vaccines Given at Vallarta Gay+ Center
@@ -25,14 +25,14 @@ get_header();
           </p>
         </div>
         <div class="box_picture_press">
-          <img src="imgs/img-press.webp" alt="" />
+          <img src="<?php bloginfo('template_url') ?>/imgs/img-press.webp" alt="" />
         </div>
       </div>
 
       <div
         class="icon_rounded green w-[115px] h-[115px] bottom-[-50px] right-[35px] sm:right-[60px]">
         <img
-          src="imgs/logo-rounded.png"
+          src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
           alt="Vallarta Gay + Community Center" />
       </div>
     </div>

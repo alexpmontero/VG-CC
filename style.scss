@@ -294,7 +294,7 @@ button {
 .wrapper_header {
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 30px;
   left: 0;
   z-index: 9;
   background: var(--color-bg);
@@ -338,8 +338,21 @@ button {
       padding: 2px 1rem;
       .controls_lang {
         display: flex;
-        gap: 5px;
-        font-size: 0.7rem;
+        gap: 6px;
+        font-size: 0.75rem;
+        li {
+          &.active {
+            a {
+              font-weight: 700;
+              opacity: 1;
+            }
+          }
+          a {
+            cursor: pointer;
+            text-transform: uppercase;
+            opacity: 0.5;
+          }
+        }
       }
     }
   }
@@ -465,10 +478,11 @@ button {
     }
     .splide__slide {
       text-align: center;
-      .item_partners {
+      img {
         max-height: 80px;
         margin: 0 auto;
         filter: grayscale(100%);
+        width: auto;
         &:hover {
           filter: grayscale(0%);
         }
@@ -503,7 +517,7 @@ button {
           }
         }
       }
-      .item_activities {
+      .item_activities img {
         border-radius: 0.8rem;
       }
     }
@@ -561,6 +575,9 @@ button {
       position: relative;
       z-index: 9;
       text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+      p {
+        margin-bottom: 1rem;
+      }
       .btn.btn_primary {
         border: 3px solid #f5f5f5;
         color: var(--color-secundary);
@@ -583,7 +600,7 @@ button {
       display: flex;
       justify-content: space-between;
       gap: 15px;
-      .picture_press {
+      .picture_press img{
         border-radius: 0.75rem;
         width: 150px;
         height: 150px;
@@ -633,9 +650,10 @@ button {
       }
     }
     .up_pt2 {
-      .picture_up {
+      .picture_up img{
         border-radius: 0.75rem;
         width: 125px;
+        min-width: 125px;
         height: 175px;
         -o-object-fit: cover;
         object-fit: cover;
@@ -717,7 +735,7 @@ button {
 }
 
 .wrapper_drawer {
-  overflow: hidden;
+  overflow: auto;
   border-radius: 5rem 0 0 0;
   .drawer-content {
     .bg_hero_drawer {
@@ -1247,7 +1265,7 @@ button {
     }
   }
   .wrapper_hero {
-    padding: 0 0.25rem;
+    padding: 0 0.5rem;
     .container_main {
       height: 90%;
       display: flex;
@@ -1337,7 +1355,7 @@ button {
     }
   }
   .page_donate {
-    margin-top: 2rem;
+    margin-top: 1rem;
     .content_donate {
       gap: 50px;
       margin-bottom: 1rem;
@@ -1407,6 +1425,34 @@ button {
   }
   .page_single .wrapper_single {
     margin-top: 1.5rem;
+  }
+  .wrapper_drawer {
+    overflow: auto;
+    border-radius: 0;
+    .drawer-content {
+      .box_banderas {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+
+        flex-direction: column;
+        .item_bandera {
+          min-height: auto;
+          text-align: left;
+          gap: 15px;
+          padding: 0.5rem 0.75rem;
+          .pic_bandera {
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: translateY(0);
+            height: 45px;
+            border-radius: 0.25rem;
+            margin-bottom: 0.25rem;
+          }
+        }
+      }
+    }
   }
 }
 

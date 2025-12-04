@@ -9,7 +9,7 @@ get_header();
     <div class="container_main relative">
       <div
         class="drawer_hero_page"
-        style="background-image: url(imgs/pages/bg_events.jpg)">
+        style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/bg_events.jpg)">
         <div class="box_ttl_hero_page">
           <h2 class="font-extrabold text-5xl mb-6">
             Every event is a chance to connect.
@@ -29,7 +29,7 @@ get_header();
       <div
         class="icon_rounded green w-[115px] h-[115px] bottom-[-50px] right-[35px] sm:right-[60px]">
         <img
-          src="imgs/logo-rounded.png"
+          src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
           alt="Vallarta Gay + Community Center" />
       </div>
     </div>

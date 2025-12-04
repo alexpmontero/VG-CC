@@ -6,32 +6,86 @@
       <div class="drawer_info_welcome">
         <h6
           class="text_mini c_marin font-bold tracking-[7px] mb-6 lg:mb-18">
-          WELCOME
+          <?php echo function_exists('pll__') ? pll__('WELCOME') : 'WELCOME'; ?>
+
         </h6>
-        <h2 class="text__welcome mb-4">
-          Empowering the LGBTQ+ community in Vallarta
-        </h2>
-        <p class="mb-9">
-          We're building a safer, healthler, and more connected future for
-          our LGBTQ+ family through free health services, education, and
-          community support.
-        </p>
+
+        <?php
+        $lang = pll_current_language(); // Detectar idioma actual
+
+        // 1. Categoría traducida
+        $cat_base = get_term_by('slug', 'hero-title', 'category');
+        $cat_translated = pll_get_term($cat_base->term_id, $lang);
+        $cat_id = $cat_translated ? $cat_translated : $cat_base->term_id;
+
+        // 2. Tags traducidos
+        $tag_slugs_base = array('main-title', 'page-home');
+        $tag_slugs_translated = array();
+
+        foreach ($tag_slugs_base as $t) {
+          $tag_term = get_term_by('slug', $t, 'post_tag');
+          $translated_term_id = pll_get_term($tag_term->term_id, $lang);
+          $translated_term = get_term($translated_term_id);
+          $tag_slugs_translated[] = $translated_term->slug;
+        }
+
+        // 3. Query
+        $args = array(
+          'posts_per_page' => 1,
+          'cat'            => $cat_id,
+          'tag_slug__in'   => $tag_slugs_translated,
+        );
+
+        $custom_query = new WP_Query($args);
+
+        if ($custom_query->have_posts()) :
+          while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+            <h2 class="text__welcome mb-4">
+              <?php the_title(); ?>
+            </h2>
+            <div class="mb-9">
+              <?php the_content(); ?>
+            </div>
+        <?php endwhile;
+          wp_reset_postdata();
+        endif;
+        ?>
+
         <div class="">
           <button class="btn btn_primary trans">
-            <span>Our services</span>
+            <span><?php echo function_exists('pll__') ? pll__('Our services') : 'Our services'; ?></span>
             <span class="ico_btn">
               <i class="ri-arrow-right-line"></i>
             </span>
           </button>
+
         </div>
       </div>
       <div
         class="drawer_hero_picture"
         id="vegas_hero"
         style="background-image: url(<?php bloginfo('template_url') ?>/imgs/bg_hero01.jpg)">
-        <h2 class="font-extrabold ttl_main">
-          Feeling safe, visible, and supported
-        </h2>
+
+        <?php
+        $args = array(
+          'posts_per_page' => 1,
+          'category_name'  => 'hero-message', // slug de la categoría
+          'tag'            => 'page-home', // slug del tag
+        );
+
+        $custom_query = new WP_Query($args);
+
+        if ($custom_query->have_posts()) :
+          while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+            <h2 class="font-extrabold ttl_main">
+              <?php the_title(); ?>
+            </h2>
+        <?php endwhile;
+          wp_reset_postdata();
+        endif;
+        ?>
+
+
       </div>
       <div
         class="icon_rounded morado w-[140px] h-[140px] bottom-[-20px] right-[55px]">
@@ -46,19 +100,25 @@
     <div class="container_main relative">
       <div
         class="about_pt1 max-w-[980px] mb-0 pl-0 lg:pl-32 md:mb-40 relative z-1 mb-12">
-        <h2 class="text_ttl font-bold mb-4">
-          We are officially recognized as a nonprofit organization in Mexico
-          and can issue facturas for donations made within Mexico. In the
-          USA, we currently provide tax receipts through our partnership
-          with the U.S.-Mexico Border Philanthropy Partnership (EIN:
-          26-2946180).
-        </h2>
-        <p>
-          We are also in the process of obtaining our own 501(c)(3)
-          nonprofit status in the U.S., which we expect to be finalized by
-          the summer of 2026. At this time, we are unable to provide tax
-          receipts for donations made from Canada.
-        </p>
+        <?php
+        $args = array(
+          'posts_per_page' => 1,
+          'category_name'  => 'about-us', // slug de la categoría
+          'tag'            => 'page-home', // slug del tag
+        );
+
+        $custom_query = new WP_Query($args);
+
+        if ($custom_query->have_posts()) :
+          while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+            <h2 class="text_ttl font-bold mb-4">
+              <?php the_title(); ?>
+            </h2>
+            <?php the_content(); ?>
+        <?php endwhile;
+          wp_reset_postdata();
+        endif;
+        ?>
       </div>
       <div
         class="about_pt2 flex flex-col md:flex-row gap-[20px] md:gap-[100px] xl:gap-[340px] md:items-end relative z-1">
@@ -68,11 +128,16 @@
           alt="" />
         <div class="md:max-w-[380px] mb-4">
           <p class="text_subttl font-semibold mb-4">
-            Together, we’re building a safer and more supportive future for
-            the LGBTQ+ community.
+
+
+            <?php echo function_exists('pll__') ? pll__('Together, we’re building') : 'Together, we’re building'; ?>
+
           </p>
           <button class="btn btn_border trans">
-            <span>Discover Who We Are</span>
+            <span>
+
+              <?php echo function_exists('pll__') ? pll__('Discover Who We Are') : 'Discover Who We Are'; ?>
+            </span>
             <span class="ico_btn">
               <i class="ri-arrow-right-line"></i>
             </span>
@@ -91,69 +156,60 @@
   </section>
 
   <section class="wrapper_carousel_partners sm:mb-22 mb-18">
-    <h2 class="text_subttl font-semibold mb-2 text-center">
-      Our Proud Partners & Supporters
-    </h2>
+
+    <?php
+    $args = array(
+      'posts_per_page' => 1,
+      'category_name'  => 'title-partner-slider', // slug de la categoría
+    );
+
+    $custom_query = new WP_Query($args);
+
+    if ($custom_query->have_posts()) :
+      while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+
+        <h2 class="text_subttl font-semibold mb-2 text-center">
+          <?php the_title(); ?>
+        </h2>
+    <?php endwhile;
+      wp_reset_postdata();
+    endif;
+    ?>
+
     <div class="box_carousel_partners border-y-1 border-gray-300 py-8">
       <div
         class="splide carousel_partners"
         aria-label="Vallarta Gay Community Center Partners Carousel">
         <div class="splide__track">
           <ul class="splide__list">
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/01.webp"
-                alt="" />
-            </li>
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/02.webp"
-                alt="" />
-            </li>
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/03.png"
-                alt="" />
-            </li>
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/01.webp"
-                alt="" />
-            </li>
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/02.webp"
-                alt="" />
-            </li>
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/03.png"
-                alt="" />
-            </li>
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/01.webp"
-                alt="" />
-            </li>
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/02.webp"
-                alt="" />
-            </li>
-            <li class="splide__slide">
-              <img
-                class="item_partners"
-                src="<?php bloginfo('template_url') ?>/imgs/partners/03.png"
-                alt="" />
-            </li>
+
+            <?php
+            $args = [
+              'post_type'      => 'post',
+              'category_name'  => 'partners-slider', // Slug de la categoría
+            ];
+
+            $query = new WP_Query($args);
+
+            if ($query->have_posts()) {
+              while ($query->have_posts()) {
+                $query->the_post();
+            ?>
+                <li class="splide__slide">
+                  <?php if (has_post_thumbnail()) {
+                    the_post_thumbnail('');
+                  } ?>
+                </li>
+
+            <?php
+              }
+              wp_reset_postdata();
+            } else {
+              echo '<p>No se encontraron publicaciones".</p>';
+            }
+            ?>
+
+
           </ul>
         </div>
       </div>
@@ -162,9 +218,9 @@
 
   <section class="wrapper_activities sm:mb-32 mb-18">
     <div class="container_main">
-      <h2 class="text_ttl font-bold mb-1 text-center">Activities</h2>
+      <h2 class="text_ttl font-bold mb-1 text-center"><?php echo function_exists('pll__') ? pll__('Activities') : 'Activities'; ?> </h2>
       <p class="text_subttl font-semibold mb-2 text-center mb-6">
-        Programs, events and special dates that strengthen our community
+        <?php echo function_exists('pll__') ? pll__('text_activities_home') : 'text_activities_home'; ?>
       </p>
       <div class="box_carousel_activities">
         <div
@@ -179,31 +235,32 @@
             </button>
           </div>
           <div class="splide__track">
-            <ul class="splide__list">
-              <li class="splide__slide">
-                <img
-                  class="item_activities"
-                  src="<?php bloginfo('template_url') ?>/imgs/activities/01.jpeg"
-                  alt="" />
-              </li>
-              <li class="splide__slide">
-                <img
-                  class="item_activities"
-                  src="<?php bloginfo('template_url') ?>/imgs/activities/03.jpeg"
-                  alt="" />
-              </li>
-              <li class="splide__slide">
-                <img
-                  class="item_activities"
-                  src="<?php bloginfo('template_url') ?>/imgs/activities/02.jpeg"
-                  alt="" />
-              </li>
-              <li class="splide__slide">
-                <img
-                  class="item_activities"
-                  src="<?php bloginfo('template_url') ?>/imgs/activities/04.jpeg"
-                  alt="" />
-              </li>
+            <ul class="splide__list item_activities">
+              <?php
+              $args = [
+                'posts_per_page' => 6,
+                'post_type'      => 'post',
+                'category_name'  => 'activities-slider', // Slug de la categoría
+              ];
+
+              $query = new WP_Query($args);
+
+              if ($query->have_posts()) {
+                while ($query->have_posts()) {
+                  $query->the_post();
+              ?>
+                  <li class="splide__slide">
+                    <?php if (has_post_thumbnail()) {
+                      the_post_thumbnail('');
+                    } ?>
+                  </li>
+              <?php
+                }
+                wp_reset_postdata();
+              } else {
+                echo '<p>No se encontraron publicaciones".</p>';
+              }
+              ?>
             </ul>
           </div>
         </div>
@@ -213,111 +270,59 @@
 
   <section class="wrapper_services_home sm:mb-22 mb-18">
     <div class="container_main">
-      <h2 class="text_ttl font-bold mb-2 text-center">Services</h2>
+      <h2 class="text_ttl font-bold mb-2 text-center">
+        <?php echo function_exists('pll__') ? pll__('Services') : 'Services'; ?>
+      </h2>
       <p
         class="text_subttl font-semibold mb-2 text-center mb-10 max-w-[820px] mx-auto">
-        Caring for our community with health, education, and support — free,
-        inclusive, and life-changing services for everyone.
+        <?php echo function_exists('pll__') ? pll__('text_services_home') : 'text_services_home'; ?>
       </p>
       <div
         class="box_services_home grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 max-w-[400px]:grid-cols-2 gap-5">
-        <div
-          class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]"
-          style="background-image: url(<?php bloginfo('template_url') ?>/imgs/services/service01.png)">
-          <span class="ico_service"><i class="ri-contrast-drop-line"></i></span>
-          <div>
-            <h2 class="font-extrabold text-2xl md:text-3xl">
-              STI Testing & Treatment
-            </h2>
-            <p class="font-normal my-1">Safe. Confidential. Expert.</p>
-            <div class="">
-              <button class="btn btn_border wht trans">
-                <span>Learn More</span>
-                <span class="ico_btn">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
 
-        <div
-          class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]"
-          style="background-image: url(<?php bloginfo('template_url') ?>/imgs/services/service02.png)">
-          <span class="ico_service"><i class="ri-leaf-fill"></i></span>
-          <div>
-            <h2 class="font-extrabold text-2xl md:text-3xl">PrEP & PEP</h2>
-            <p class="font-normal my-1">HIV prevention you can trust.</p>
-            <div class="">
-              <button class="btn btn_border wht trans">
-                <span>Learn More</span>
-                <span class="ico_btn">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
+        <?php
+        $args = [
+          'post_type'      => 'post',
+          'order'          => 'ASC',
+          'category_name'  => 'services', // Slug de la categoría
+        ];
 
-        <div
-          class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]"
-          style="background-image: url(<?php bloginfo('template_url') ?>/imgs/services/service03.png)">
-          <span class="ico_service"><i class="ri-capsule-fill"></i></span>
-          <div>
-            <h2 class="font-extrabold text-2xl md:text-3xl">DoxyPEP</h2>
-            <p class="font-normal my-1">New tools, stronger protection.</p>
-            <div class="">
-              <button class="btn btn_border wht trans">
-                <span>Learn More</span>
-                <span class="ico_btn">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
+        $query = new WP_Query($args);
 
-        <div
-          class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]"
-          style="background-image: url(<?php bloginfo('template_url') ?>/imgs/services/service04.png)">
-          <span class="ico_service"><i class="ri-macbook-line"></i></span>
-          <div>
-            <h2 class="font-extrabold text-2xl md:text-3xl">
-              English Classes
-            </h2>
-            <p class="font-normal my-1">Free education, brighter future.</p>
-            <div class="">
-              <button class="btn btn_border wht trans">
-                <span>Learn More</span>
-                <span class="ico_btn">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
+        if ($query->have_posts()) {
+          while ($query->have_posts()) {
+            $query->the_post();
+        ?>
+            <?php
+            // Obtener imagen destacada
+            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+            ?>
+            <div
+              class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]" style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');">
+              <span class="ico_service"><i class="<?php echo wp_strip_all_tags(get_the_excerpt(), true); ?>"></i></span>
+              <div>
+                <h2 class="font-extrabold text-2xl md:text-3xl">
+                  <?php the_title(); ?>
+                </h2>
+                <div class="font-normal my-1"><?php the_content(); ?></div>
+                <div class="">
+                  <button class="btn btn_border wht trans">
+                    <span><?php echo function_exists('pll__') ? pll__('Learn More') : 'Learn More'; ?></span>
+                    <span class="ico_btn">
+                      <i class="ri-arrow-right-line"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+        <?php
+          }
+          wp_reset_postdata();
+        } else {
+          echo '<p>No se encontraron publicaciones".</p>';
+        }
+        ?>
 
-        <div
-          class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]"
-          style="background-image: url(<?php bloginfo('template_url') ?>/imgs/services/service05.png)">
-          <span class="ico_service"><i class="ri-heart-2-line"></i></span>
-          <div>
-            <h2 class="font-extrabold text-2xl md:text-3xl">
-              Mental Health Support
-            </h2>
-            <p class="font-normal my-1">
-              Bilingual care in a space you belong.
-            </p>
-            <div class="">
-              <button class="btn btn_border wht trans">
-                <span>Learn More</span>
-                <span class="ico_btn">
-                  <i class="ri-arrow-right-line"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -329,14 +334,13 @@
       <div
         class="flex mb-8 justify-between md:items-center flex-col sm:flex-row gap-5">
         <div class="">
-          <h2 class="text_ttl font-bold mb-1">Our voice in the Press</h2>
+          <h2 class="text_ttl font-bold mb-1"><?php echo function_exists('pll__') ? pll__('Press') : 'Press'; ?> </h2>
           <p class="text_subttl font-semibold max-w-[600px]">
-            Each mention tells part of our story — a story of inclusion,
-            strength, and visibility.
+            <?php echo function_exists('pll__') ? pll__('text_press_home') : 'text_press_home'; ?>
           </p>
         </div>
         <button class="btn btn_secundary trans bg-red-200 min-w-[160px]">
-          <span>See More</span>
+          <span><?php echo function_exists('pll__') ? pll__('Learn More') : 'Learn More'; ?></span>
           <span class="ico_btn">
             <i class="ri-arrow-right-line"></i>
           </span>
@@ -344,65 +348,46 @@
       </div>
       <div
         class="box_items_press grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 gap-6">
-        <div class="item_press">
-          <img
-            class="picture_press"
-            src="https://ximg.es/600x400/000/fff.jpg"
-            alt="" />
-          <div class="info_press">
-            <h5 class="font-medium text-lg">
-              370 Vaccines Given at Vallarta Gay+ Center
-            </h5>
-            <div class="flex items-center justify-between gap-5">
-              <p class="text-sm text-gray-400">
-                <i class="ri-calendar-line"></i> Marzo 12, 2025
-              </p>
-              <button class="btn_mini mini_orange trans">
-                <i class="ri-arrow-right-line"></i>
-              </button>
+        <?php
+        $args = [
+          'posts_per_page' => 3,
+          'post_type'      => 'post',
+          'category_name'  => 'press', // Slug de la categoría
+        ];
+
+        $query = new WP_Query($args);
+
+        if ($query->have_posts()) {
+          while ($query->have_posts()) {
+            $query->the_post();
+        ?>
+            <div class="item_press">
+              <div class="picture_press">
+                <?php if (has_post_thumbnail()) {
+                  the_post_thumbnail('');
+                } ?>
+              </div>
+              <div class="info_press">
+                <h5 class="font-medium text-lg">
+                  <?php the_title(); ?>
+                </h5>
+                <div class="flex items-center justify-between gap-5">
+                  <div class="text-sm text-gray-400">
+                    <i class="ri-calendar-line"></i> <?php echo wp_strip_all_tags(get_the_excerpt(), true); ?>
+                  </div>
+                  <a href="<?php echo wp_strip_all_tags(get_the_content(), true); ?>" target="_blank" class="btn_mini mini_orange trans">
+                    <i class="ri-arrow-right-line"></i>
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="item_press">
-          <img
-            class="picture_press"
-            src="https://ximg.es/600x400/000/fff.jpg"
-            alt="" />
-          <div class="info_press">
-            <h5 class="font-medium text-lg">
-              VGCC Honors Mikel Alvarez for His Contributions, Welcomes New
-              Leadership & Celebrates Community Growth
-            </h5>
-            <div class="flex items-center justify-between gap-5">
-              <p class="text-sm text-gray-400">
-                <i class="ri-calendar-line"></i> Marzo 12, 2025
-              </p>
-              <button class="btn_mini mini_orange trans">
-                <i class="ri-arrow-right-line"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="item_press">
-          <img
-            class="picture_press"
-            src="https://ximg.es/600x400/000/fff.jpg"
-            alt="" />
-          <div class="info_press">
-            <h5 class="font-medium text-lg">
-              The Municipal Commission for Substantive Gender Equality and
-              Diversity is installed in Vallarta
-            </h5>
-            <div class="flex items-center justify-between gap-5">
-              <p class="text-sm text-gray-400">
-                <i class="ri-calendar-line"></i> Marzo 12, 2025
-              </p>
-              <button class="btn_mini mini_orange trans">
-                <i class="ri-arrow-right-line"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+        <?php
+          }
+          wp_reset_postdata();
+        } else {
+          echo '<p>No se encontraron publicaciones".</p>';
+        }
+        ?>
       </div>
     </div>
   </section>
@@ -423,84 +408,68 @@
         </button>
       </div>
       <div class="box_items_upcoming">
-        <div class="item_upcoming grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="up_pt1 flex gap-3 md:gap-12 items-start">
-            <div class="data_event">
-              <span>Nov</span><span class="num">28</span><span>2025</span>
+
+
+
+        <?php
+        $args = [
+          'posts_per_page' => 3,
+          'post_type'      => 'post',
+          'category_name'  => 'events', // Slug de la categoría
+        ];
+
+        $query = new WP_Query($args);
+
+        if ($query->have_posts()) {
+          while ($query->have_posts()) {
+            $query->the_post();
+        ?>
+
+
+            <div class="item_upcoming grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div class="up_pt1 flex gap-3 md:gap-12 items-start">
+                <div class="data_event">
+                  <span>Nov</span><span class="num">28</span><span>2025</span>
+                </div>
+                <div>
+                  <h2 class="font-semibold text-2xl">
+                    <?php the_title(); ?>
+                  </h2>
+                  <p class="font-medium text-lg italic">
+                    <span><i class="ri-map-pin-2-line"></i></span>
+                    <span><?php echo wp_strip_all_tags(get_the_excerpt(), true); ?></span>
+                  </p>
+                </div>
+              </div>
+              <div class="up_pt2 flex gap-3 md:gap-12 items-start">
+                <div>
+                  <div class="font-regular mb-4">
+                    <?php the_content(); ?>
+                  </div>
+                  <p>
+                    <button class="btn btn_secundary trans">
+                      <span><?php echo function_exists('pll__') ? pll__('Learn More') : 'Learn More'; ?></span>
+                      <span class="ico_btn">
+                        <i class="ri-arrow-right-line"></i>
+                      </span>
+                    </button>
+                  </p>
+                </div>
+                <div class="picture_up">
+                  <?php if (has_post_thumbnail()) {
+                    the_post_thumbnail('');
+                  } ?>
+                </div>
+              </div>
             </div>
-            <div>
-              <h2 class="font-semibold text-2xl">
-                Community Health & Wellness Fair
-              </h2>
-              <p class="font-medium text-lg italic">
-                <span><i class="ri-map-pin-2-line"></i></span>
-                <span>Vallarta Gay+ Community Center, Puerto Vallarta</span>
-              </p>
-            </div>
-          </div>
-          <div class="up_pt2 flex gap-3 md:gap-12 items-start">
-            <div>
-              <p class="mb-4 font-regular">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Similique repellendus natus possimus, magnam dignissimos
-                saepe quam aperiam, voluptates dolorum dolores perferendis
-                obcaecati odit repudiandae, ea dicta at. Modi, praesentium!
-                Quibusdam.
-              </p>
-              <p>
-                <button class="btn btn_secundary trans">
-                  <span>See Event</span>
-                  <span class="ico_btn">
-                    <i class="ri-arrow-right-line"></i>
-                  </span>
-                </button>
-              </p>
-            </div>
-            <img
-              class="picture_up"
-              src="https://ximg.es/600x400/000/fff.jpg"
-              alt="" />
-          </div>
-        </div>
-        <div class="item_upcoming grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="up_pt1 flex gap-3 md:gap-12 items-start">
-            <div class="data_event">
-              <span>Nov</span><span class="num">28</span><span>2025</span>
-            </div>
-            <div>
-              <h2 class="font-semibold text-2xl">
-                Community Health & Wellness Fair
-              </h2>
-              <p class="font-medium text-lg italic">
-                <span><i class="ri-map-pin-2-line"></i></span>
-                <span>Vallarta Gay+ Community Center, Puerto Vallarta</span>
-              </p>
-            </div>
-          </div>
-          <div class="up_pt2 flex gap-3 md:gap-12 items-start">
-            <div>
-              <p class="mb-4 font-regular">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Similique repellendus natus possimus, magnam dignissimos
-                saepe quam aperiam, voluptates dolorum dolores perferendis
-                obcaecati odit repudiandae, ea dicta at. Modi, praesentium!
-                Quibusdam.
-              </p>
-              <p>
-                <button class="btn btn_secundary trans">
-                  <span>See Event</span>
-                  <span class="ico_btn">
-                    <i class="ri-arrow-right-line"></i>
-                  </span>
-                </button>
-              </p>
-            </div>
-            <img
-              class="picture_up"
-              src="https://ximg.es/600x400/000/fff.jpg"
-              alt="" />
-          </div>
-        </div>
+
+        <?php
+          }
+          wp_reset_postdata();
+        } else {
+          echo '<p>No se encontraron publicaciones".</p>';
+        }
+        ?>
       </div>
     </div>
     <h2

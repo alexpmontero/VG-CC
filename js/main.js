@@ -62,6 +62,7 @@ function splideActivities() {
     interval: 3000,
     pauseOnHover: true,
     pauseOnFocus: true,
+    pagination: false,
     gap: "2rem",
     breakpoints: {
       768: { perPage: 1 },

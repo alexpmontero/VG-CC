@@ -10,7 +10,7 @@ get_header();
     <div class="container_main relative">
       <div
         class="drawer_hero_page"
-        style="background-image: url(imgs/pages/bg_about.jpg)">
+        style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/bg_about.jpg)">
         <div class="box_ttl_hero_page">
           <h2 class="font-extrabold text-5xl mb-6">
             Building Community. Changing Lives.
@@ -28,7 +28,7 @@ get_header();
       <div
         class="icon_rounded green w-[115px] h-[115px] bottom-[-50px] right-[35px] sm:right-[60px]">
         <img
-          src="imgs/logo-rounded.png"
+          src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
           alt="Vallarta Gay + Community Center" />
       </div>
     </div>
@@ -39,7 +39,7 @@ get_header();
       <div
         class="content_about flex flex-col-reverse justify-center lg:flex-row gap-x-5 md:gap-x-18">
         <img
-          src="imgs/bg_hero03.webp"
+          src="<?php bloginfo('template_url') ?>/imgs/bg_hero03.webp"
           class="rounded-2xl rounded-bl-[1rem] lg:rounded-bl-[8rem] md:object-cover w-full lg:w-[325px] h-full sm:h-[350px] lg:h-[500px]"
           alt="" />
         <div class="py-12">
@@ -86,7 +86,7 @@ get_header();
           </button>
         </div>
         <img
-          src="imgs/bg_mission.jpg"
+          src="<?php bloginfo('template_url') ?>/imgs/bg_mission.jpg"
           class="rounded-2xl rounded-bl-[1rem] hidden lg:block lg:rounded-bl-[8rem] md:object-cover w-full lg:w-[325px] h-full sm:h-[350px] lg:h-[500px]"
           alt="" />
       </div>
@@ -95,7 +95,7 @@ get_header();
       <div
         class="content_about flex flex-col justify-center lg:flex-row gap-x-5 md:gap-x-18">
         <img
-          src="imgs/bg_vission.png"
+          src="<?php bloginfo('template_url') ?>/imgs/bg_vission.png"
           class="rounded-2xl rounded-bl-[1rem] lg:rounded-bl-[8rem] md:object-cover w-full lg:w-[325px] h-full sm:h-[350px] lg:h-[500px]"
           alt="" />
         <div class="py-8">
