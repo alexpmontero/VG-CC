@@ -1,3 +1,10 @@
+@charset "UTF-8";
+/*
+Theme Name: Vallarta Gay + Community Center
+Author: Alex P. Montero, Vallarta Gay + Community Center
+Description: Nueva versión 2025 del Sitio Vallarta Gay + Community Center
+Version: 1.0
+*/
 :root {
   --font-montserrat: "Montserrat", sans-serif;
   --color-primary: #5452a5;
@@ -98,6 +105,23 @@ button {
 }
 .btn_mini.mini_primary {
   background: var(--color-primary);
+}
+
+.page-numbers {
+  cursor: pointer;
+  background: #d7d7ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  font-weight: 500;
+  border: 3px solid transparent;
+  border-radius: 0.55rem;
+}
+.page-numbers.current {
+  border: 2px solid var(--color-primary);
+  font-weight: 600;
 }
 
 .btn {
@@ -211,23 +235,25 @@ button {
 .modal__team .item_team {
   background-color: #ffffff;
   box-shadow: 1px 1px 32px rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
   gap: 1rem;
   padding: 1.5rem;
   border-radius: 10rem 1rem 1rem 1rem;
   position: relative;
 }
+.modal__team .item_team > .relative {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 15px;
+}
 .modal__team .item_team .names_team {
-  max-width: 350px;
+  max-width: 300px;
   margin-top: 3rem;
-  margin-left: 3rem;
   margin-bottom: 0.75rem;
 }
-.modal__team .item_team .picture_team {
-  right: 50px;
+.modal__team .item_team .picture_team_img {
   height: 225px;
+  right: 0;
 }
 .modal__team .item_team .info_personal {
   background-color: var(--color-primary);
@@ -646,6 +672,9 @@ button {
   font-size: 0.9rem;
   border-radius: 0.75rem;
 }
+.wrapper_faqs .box_faqs .content_accord_item_faqs .accrdn_item_faqs .accordion-content p {
+  margin-bottom: 1rem;
+}
 .wrapper_faqs .box_faqs .content_accord_item_faqs .accrdn_item_faqs .icon {
   background-color: #d9cb51;
   display: flex;
@@ -787,13 +816,14 @@ button {
   background: rgb(255, 255, 255);
   text-shadow: none;
   color: #333333;
+  border-radius: 1rem 1rem 10rem 1rem;
 }
 .wrapper_hero_in_page .drawer_hero_page.in_press .box_picture_press {
   position: relative;
   z-index: 1;
 }
 .wrapper_hero_in_page .drawer_hero_page.in_press .box_picture_press img {
-  border-radius: 1rem 1rem 1rem 10rem;
+  border-radius: 1rem;
   object-fit: cover;
   max-height: 400px;
 }
@@ -842,11 +872,12 @@ button {
 .item_team .names_team h2 {
   line-height: 1.2;
 }
-.item_team .picture_team {
+.item_team .picture_team img {
   position: absolute;
   bottom: 0;
   right: 0;
   height: 315px;
+  width: auto;
   border-bottom-right-radius: 1rem;
 }
 .item_team.directors {

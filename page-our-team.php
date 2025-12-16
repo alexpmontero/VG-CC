@@ -4,43 +4,75 @@
 
 get_header();
 ?>
+
 <main class="wrapper_main page_our_team">
-  <section class="wrapper_hero_in_page mb-18">
-    <div class="container_main relative">
-      <div
-        class="drawer_hero_page"
-        style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/our-team.png)">
-        <div class="box_ttl_hero_page">
-          <h2 class="font-extrabold text-5xl mb-6">
-            The Heart Behind Our Mission.
-          </h2>
-          <p class="font-medium">
-            We’re proud of the people who bring our mission to life — a
-            diverse team united by love, empathy, and the drive to make
-            change happen.
-          </p>
+
+  <?php
+  // Obtener la página por su slug
+  $page = get_page_by_path('about');
+
+  if ($page) {
+    // Obtener la URL de la imagen destacada
+    $thumbnail_url = get_the_post_thumbnail_url($page->ID, 'full');
+
+    if ($thumbnail_url) :
+  ?>
+      <section class="wrapper_hero_in_page lg:mb-22 mb-10">
+        <div class="container_main relative">
+          <div
+            class="drawer_hero_page"
+            style="background-image: url('<?php echo esc_url($thumbnail_url); ?>')">
+
+            <div class="box_ttl_hero_page">
+              <h2 class="font-extrabold text-5xl mb-6">
+                <?php the_field('page_title'); ?>
+              </h2>
+              <p class="font-medium">
+                <?php the_field('page_excerpt'); ?>
+              </p>
+            </div>
+          </div>
+
+          <h1 class="text_float_hero font-extrabold text-6xl mb-6"><?php the_field('page_subtitle'); ?></h1>
+
+          <div
+            class="icon_rounded green w-[115px] h-[115px] bottom-[-50px] right-[35px] sm:right-[60px]">
+            <img
+              src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
+              alt="Vallarta Gay + Community Center" />
+          </div>
         </div>
-      </div>
+      </section>
+  <?php
+    else :
+      echo '<p class="text-center">No tiene imagen destacada.</p>';
+    endif;
+  } else {
+    echo '<p>Página no encontrada.</p>';
+  }
+  ?>
 
-      <h1 class="text_float_hero font-extrabold text-6xl mb-6">
-        Our Team, Our Family
-      </h1>
+  <?php
+  $args = array(
+    'posts_per_page' => 1,
+    'category_name'  => 'our-team', // slug de la categoría
+    'tag'            => 'page-our-team', // slug del tag
+  );
 
-      <div
-        class="icon_rounded green w-[115px] h-[115px] bottom-[-50px] right-[35px] sm:right-[60px]">
-        <img
-          src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
-          alt="Vallarta Gay + Community Center" />
-      </div>
-    </div>
-  </section>
+  $custom_query = new WP_Query($args);
 
-  <section
-    class="wrapper_descript_team max-w-[980px] px-4 mx-auto text_ttl text-center font-semibold leading-[1.95]">
-    Behind every service, smile, and success story is a team of passionate
-    individuals committed to equality, health, and community care. Together,
-    we work every day to make a real difference for our LGBTQ+ family.
-  </section>
+  if ($custom_query->have_posts()) :
+    while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+
+      <section
+        class="wrapper_descript_team max-w-[980px] px-4 mx-auto text_ttl text-center font-semibold leading-[1.95]">
+        <?php the_content() ?>
+      </section>
+
+  <?php endwhile;
+    wp_reset_postdata();
+  endif;
+  ?>
 
   <section class="wrapper_ourteam mb-24">
     <div class="container_main relative">
@@ -50,73 +82,59 @@ get_header();
       </h2>
       <div
         class="drawer_ourteam grid md:grid-cols-2 xl:grid-cols-3 relative z-1 gap-x-18 gap-y-30 md:gap-y-36 pt-[4rem] md:pt-[16rem]">
+
+
         <div class="item_team initial">
-          <h2 class="text-4xl sm:text-5xl font-bold mb-1">Our team</h2>
-          <p class="font-medium">
-            Our dedicated team brings compassion, expertise, and heart to
-            every initiative. From healthcare to education, we stand united
-            to build a stronger, healthier, and more inclusive community.
-          </p>
-        </div>
-        <div class="item_team">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Pedro López</h2>
-            <p class="font-medium">Executive Director</p>
+          <h2 class="text-4xl sm:text-5xl font-bold mb-2">
+            <?php echo function_exists('pll__') ? pll__('Our Team') : 'Our Team'; ?>
+          </h2>
+          <div class="font-medium">
+            <?php echo function_exists('pll__') ? pll__('Our dedicated') : 'Our dedicated'; ?>
           </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/01.png" alt="" />
-          <button
-            id="openModal"
-            class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
         </div>
 
-        <div class="item_team">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Ashley Hernández Castellon</h2>
-            <p class="font-medium">Doctor</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/02.png" alt="" />
-          <button
-            class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
-        <div class="item_team">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Fatima Farias Martinez</h2>
-            <p class="font-medium">Nurse</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/03.png" alt="" />
-          <button
-            class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
-        <div class="item_team">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Yesenia Cortés</h2>
-            <p class="font-medium">
-              Coordinator of Volunteers and Prevention
-            </p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/04.png" alt="" />
-          <button
-            class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
-        <div class="item_team">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Alberto Díaz de León Jiménez</h2>
-            <p class="font-medium">Mtro. Psychologist</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/05.png" alt="" />
-          <button
-            class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
+        <?php
+        $args = array(
+          'category_name'  => 'team', // slug de la categoría
+          'tag'            => 'team-general', // slug del tag
+          'order'          => 'ASC',
+        );
+
+        $custom_query = new WP_Query($args);
+
+        if ($custom_query->have_posts()) :
+          while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+
+            <div class="item_team">
+              <div class="names_team">
+                <h2 class="text-2xl font-bold"><?php the_title(); ?></h2>
+                <div class="font-medium"><?php the_excerpt(); ?></div>
+              </div>
+
+              <div class="picture_team">
+                <?php if (has_post_thumbnail()) {
+                  the_post_thumbnail('medium', ['class' => 'team-img']);
+                } ?>
+              </div>
+
+              <button
+                class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl openModal"
+                data-name="<?php echo esc_attr(get_the_title()); ?>"
+                data-role="<?php echo esc_attr(get_the_excerpt()); ?>"
+                data-image="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>"
+                data-content="<?php echo esc_attr(wp_kses_post(apply_filters('the_content', get_the_content()))); ?>">
+                <i class="ri-arrow-right-line"></i>
+              </button>
+            </div>
+
+
+
+        <?php endwhile;
+          wp_reset_postdata();
+        endif;
+        ?>
+
+
       </div>
     </div>
   </section>
@@ -129,92 +147,59 @@ get_header();
       </h2>
 
       <div class="flex flex-col sm:flex-row justify-between items-center gap-x-9">
-        <h2 class="text-4xl sm:text-5xl font-bold mb-1">Board of Directors</h2>
-        <p class="font-medium text-center sm:text-left max-w-[400px]">
-          Our Board provides vision and leadership to keep our mission
-          alive, strengthening and uniting the LGBTQ+ community.
-        </p>
+        <h2 class="text-4xl sm:text-5xl font-bold mb-1">
+
+          <?php echo function_exists('pll__') ? pll__('Board of Directors') : 'Board of Directors'; ?>
+        </h2>
+        <div class="font-medium text-center sm:text-left max-w-[400px]">
+          <?php echo function_exists('pll__') ? pll__('Our Board provides') : 'Our Board provides'; ?>
+
+        </div>
       </div>
       <div
         class="drawer_ourteam grid md:grid-cols-2 xl:grid-cols-3 relative z-1 gap-x-18 gap-y-36 pt-[8rem]">
-        <div class="item_team directors">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Don Pickens</h2>
-            <p class="font-medium">Board Chair</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/06.png" alt="" />
-          <button
-            class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
-        <div class="item_team directors">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Mike Owens</h2>
-            <p class="font-medium">Secretary</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/07.png" alt="" />
-          <button
-            class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
 
-        <div class="item_team directors">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Matt Karimi</h2>
-            <p class="font-medium">Doctor</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/08.png" alt="" />
-          <button
-            class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
-        <div class="item_team directors">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Jet De La Isla</h2>
-            <p class="font-medium">Comunications</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/09.png" alt="" />
-          <button
-            class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
-        <div class="item_team directors">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Poncho Davalos</h2>
-            <p class="font-medium">Board Member</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/10.png" alt="" />
-          <button
-            class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
-        <div class="item_team directors">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Luis Villavicencio</h2>
-            <p class="font-medium">Adjunct Board Member</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/11.png" alt="" />
-          <button
-            class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
-        <div class="item_team directors">
-          <div class="names_team">
-            <h2 class="text-2xl font-bold">Mitchel Kushner M.D.</h2>
-            <p class="font-medium">Adjunct Board Member</p>
-          </div>
-          <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/12.png" alt="" />
-          <button
-            class="btn_mini mini_orange trans absolute b-0 right-5 z-1 shadow-2xl">
-            <i class="ri-arrow-right-line"></i>
-          </button>
-        </div>
+
+
+        <?php
+        $args = array(
+          'category_name'  => 'team', // slug de la categoría
+          'tag'            => 'team-executives', // slug del tag
+          // 'order'          => 'ASC',
+        );
+
+        $custom_query = new WP_Query($args);
+
+        if ($custom_query->have_posts()) :
+          while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+
+            <div class="item_team directors">
+              <div class="names_team">
+                <h2 class="text-2xl font-bold"><?php the_title(); ?></h2>
+                <div class="font-medium"><?php the_excerpt(); ?></div>
+              </div>
+
+              <div class="picture_team">
+                <?php if (has_post_thumbnail()) {
+                  the_post_thumbnail('medium', ['class' => 'team-img']);
+                } ?>
+              </div>
+
+              <button
+                class="btn_mini mini_green trans absolute b-0 right-5 z-1 shadow-2xl openModal"
+                data-name="<?php echo esc_attr(get_the_title()); ?>"
+                data-role="<?php echo esc_attr(get_the_excerpt()); ?>"
+                data-image="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>"
+                data-content="<?php echo esc_attr(wp_kses_post(apply_filters('the_content', get_the_content()))); ?>">
+                <i class="ri-arrow-right-line"></i>
+              </button>
+            </div>
+
+        <?php endwhile;
+          wp_reset_postdata();
+        endif;
+        ?>
+
       </div>
     </div>
   </section>
@@ -244,41 +229,13 @@ get_header();
       </button>
       <div class="relative w-full">
         <div class="names_team">
-          <h2 class="text-3xl font-bold">Pedro López</h2>
-          <p class="font-medium">Executive Director</p>
+          <h2 id="modalName" class="text-3xl font-bold"></h2>
+          <p id="modalRole" class="font-medium"></p>
         </div>
-        <img class="picture_team" src="<?php bloginfo('template_url') ?>/imgs/team/01.png" alt="" />
+        <img id="modalImage" class="picture_team_img" src="" alt="" />
       </div>
 
-      <div class="info_personal custom-scroll">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Voluptatem assumenda voluptatibus veritatis accusantium, commodi
-          quaerat consequuntur natus tempore. Nostrum commodi dolorum culpa
-          eveniet, ipsum ex excepturi nobis illo mollitia. Repudiandae modi
-          reprehenderit qui, expedita nemo non? Ab nihil, voluptas quasi
-          obcaecati, ex illo ipsum quo ullam accusamus id et eum quos ad?
-          Temporibus dolorem nemo cumque. Nam inventore eaque voluptas
-          assumenda, sunt delectus molestiae, quod ipsa minus nemo molestias
-          veniam dignissimos numquam? Corporis odit placeat, excepturi
-          nesciunt id nulla iste quos dicta obcaecati cumque soluta eum ad
-          eos earum, beatae quo! Vero atque error similique fuga in
-          consequuntur delectus ab.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab sint
-          corrupti, nihil ullam vitae aliquid et harum! Perspiciatis fugit
-          eligendi ab minima reiciendis. Quidem quis quasi fugiat tempora ab
-          error.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Reiciendis inventore neque adipisci, dolores ex omnis maxime est
-          error sit dolore recusandae fugiat deleniti voluptas praesentium.
-          Dicta vitae eveniet dignissimos consequatur cumque non temporibus
-          exercitationem voluptate, laboriosam porro at earum, eos aliquid
-          neque, dolorem provident vero! Quasi debitis in hic tenetur?
-        </p>
+      <div id="modalBody" class="info_personal custom-scroll">
       </div>
     </div>
   </div>

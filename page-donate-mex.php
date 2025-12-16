@@ -8,61 +8,76 @@ get_header();
 <main class="wrapper_main page_donate">
   <div class="container_main">
     <div class="content_donate">
-      <div class="drawer_info_in_donate">
-        <h1 class="text-3xl font-bold lg:text-4xl xl:text-6xl mb-6">Donate in Mexico</h1>
-        <div class="block sm:flex md:block lg:flex gap-6">
-          <img
-            class="h-13 rounded-md mb-2"
-            src="<?php bloginfo('template_url') ?>/imgs/bandera-mex.png"
-            alt="Donate in Mexico" />
-          <div class="">
-            <h5 class="text-2xl font-semibold">Payment Information</h5>
-            <p>
-              If you wish to pay in Mexico, Alianza Fronteriza de
-              Filantropía, A.C., BPP’s sister entity in Mexico, will issue a
-              Digital Fiscal Document through Internet (CFDI or Comprobante
-              Fiscal Digital por Internet) valid in México for tax purposes.
-            </p>
-            <p class="mt-4 font-bold">
-              Alianza Fronteriza de Filantropía, A.C. is a donataria
-              autorizada.
-            </p>
-            <div class="mt-4">
-              <a
-                href="http://"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn_border !w-fit mb-4">
-                <span>PDF for Giving Through USA - English</span>
-                <span class="ico_btn">
-                  <i class="ri-arrow-right-line"></i> </span></a>
 
-              <a
-                href="http://"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn_border !w-fit mb-4">
-                <span>PDF for Giving Through USA - Spanish</span>
-                <span class="ico_btn">
-                  <i class="ri-arrow-right-line"></i> </span></a>
+      <?php
+      // Obtener la página por su slug
+      $page = get_page_by_path('donate-mex');
+
+      if ($page) {
+        // Obtener la URL de la imagen destacada
+        $thumbnail_url = get_the_post_thumbnail_url($page->ID, 'full');
+
+        if ($thumbnail_url) :
+      ?>
+          <div class="drawer_info_in_donate">
+            <h1 class="text-3xl font-bold lg:text-4xl xl:text-6xl mb-6"> <?php the_field('page_title'); ?></h1>
+            <div class="block sm:flex md:block lg:flex gap-6">
+              <img
+                class="h-13 rounded-md mb-2"
+                src="<?php bloginfo('template_url') ?>/imgs/bandera-mex.png"
+                alt="Donate in Mexico" />
+              <div class="">
+                <h5 class="text-2xl font-bold">
+                  <?php echo function_exists('pll__') ? pll__('Payment Information') : 'Payment Information'; ?></h5>
+
+                <?php the_field('page_subtitle'); ?>
+                <div class="mt-4 font-bold">
+                  <?php the_field('page_excerpt'); ?>
+                </div>
+                <div class="mt-4">
+                  <a
+                    href="http://"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn_border !w-fit mb-4">
+                    <span>PDF for Giving Through USA - English</span>
+                    <span class="ico_btn">
+                      <i class="ri-arrow-right-line"></i> </span></a>
+
+                  <a
+                    href="http://"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn_border !w-fit mb-4">
+                    <span>PDF for Giving Through USA - Spanish</span>
+                    <span class="ico_btn">
+                      <i class="ri-arrow-right-line"></i> </span></a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+          <div
+            class="drawer_picture_in_donate relative"
+            style="background-image: url('<?php echo esc_url($thumbnail_url); ?>')">
+            <div
+              class="icon_rounded yellow w-[115px] h-[115px] bottom-[-50px] right-[30px]">
+              <img
+                src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
+                alt="Vallarta Gay + Community Center" />
+            </div>
+          </div>
+      <?php
+        else :
+          echo '<p class="text-center">No tiene imagen destacada.</p>';
+        endif;
+      } else {
+        echo '<p>Página no encontrada.</p>';
+      }
+      ?>
 
-      <div
-        class="drawer_picture_in_donate relative"
-        style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/bg_mex.jpg)">
-        <div
-          class="icon_rounded yellow w-[115px] h-[115px] bottom-[-50px] right-[30px]">
-          <img
-            src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
-            alt="Vallarta Gay + Community Center" />
-        </div>
-      </div>
     </div>
     <div class="content_ways_donate">
-      <h2 class="text-2xl md:text-4xl font-bold mb-5">Ways to donate</h2>
+      <h2 class="text-2xl md:text-4xl font-bold mb-5"><?php echo function_exists('pll__') ? pll__('Ways to donate') : 'Ways to donate'; ?></h2>
       <div class="tabs-component" data-tabs>
         <!-- Tabs Header -->
         <div
@@ -70,7 +85,7 @@ get_header();
           <button
             class="tab-btn p-4 text-xl cursor-pointer bg-white w-full"
             data-tab="1">
-            Wire transfer
+                <?php echo function_exists('pll__') ? pll__('Wire transfer') : 'Wire transfer'; ?>
           </button>
         </div>
 
@@ -189,7 +204,7 @@ get_header();
     </div>
   </div>
 
-    <?php include get_template_directory() . '/pre-footer.php'; ?>
+  <?php include get_template_directory() . '/pre-footer.php'; ?>
 
 </main>
 <?php
@@ -201,7 +216,7 @@ get_footer();
     menuMovil();
     isDropdown();
     headerOnScroll();
-      drawerInit();
+    drawerInit();
     tabsComponent();
   });
 </script>

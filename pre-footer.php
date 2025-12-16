@@ -6,15 +6,13 @@
           <div>
             <img class="h-[90px]" src="<?php bloginfo('template_url') ?>/imgs/logo-vgcc-wt.png" alt="" />
           </div>
-          <p>
-            We are a nonprofit orgnization providing healthcare, education,
-            and empowerment to the LGBTQ+ community in Vallarta.
-          </p>
+          <?php echo function_exists('pll__') ? pll__('info_small') : 'info_small'; ?>
+
         </div>
         <div class="w-full mb-4">
-          <h6 class="font-semibold tracking-[5px] text_mini mb-4">EMAIL</h6>
+          <h6 class="font-semibold tracking-[5px] text_mini mb-4"> <?php echo function_exists('pll__') ? pll__('email_title') : 'email_title'; ?></h6>
           <p class="text-md leading-5">
-            <a href="mailto:info@vallartagaycc.org">info@vallartagaycc.org</a>
+            <a href="mailto: <?php echo company_data('email'); ?>"> <?php echo company_data('email'); ?></a>
           </p>
         </div>
         <div class="w-full">
@@ -22,7 +20,9 @@
             WhatsApp
           </h6>
           <p class="text-2xl flex items-center gap-1 font-semibold">
-            <span><i class="ri-whatsapp-line"></i></span><a href="#">(+52) 322 128 6793</a>
+            <span><i class="ri-whatsapp-line"></i></span><a target="_blank" href="<?php echo company_data('whatsapp_url'); ?>">
+              <?php echo company_data('whatsapp'); ?>
+            </a>
           </p>
         </div>
       </div>

@@ -6,40 +6,56 @@ get_header();
 ?>
 
 <main class="wrapper_main page_contact">
-  <section class="wrapper_hero_in_page mb-22">
-    <div class="container_main relative">
-      <div
-        class="drawer_hero_page"
-        style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/bg_contact.png)">
-        <div class="box_ttl_hero_page">
-          <h2 class="font-extrabold text-5xl mb-6">Connect with Us</h2>
-          <p class="font-medium">
-            We’re here to listen, help, and support you. Find us at our
-            locations or reach out to learn more about our services and
-            programs.
-          </p>
+  <?php
+  // Obtener la página por su slug
+  $page = get_page_by_path('contact');
+
+  if ($page) {
+    // Obtener la URL de la imagen destacada
+    $thumbnail_url = get_the_post_thumbnail_url($page->ID, 'full');
+
+    if ($thumbnail_url) :
+  ?>
+      <section class="wrapper_hero_in_page lg:mb-22 mb-10">
+        <div class="container_main relative">
+          <div
+            class="drawer_hero_page"
+            style="background-image: url('<?php echo esc_url($thumbnail_url); ?>')">
+
+            <div class="box_ttl_hero_page">
+              <h2 class="font-extrabold text-5xl mb-6">
+                <?php the_field('page_title'); ?>
+              </h2>
+              <p class="font-medium">
+                <?php the_field('page_excerpt'); ?>
+              </p>
+            </div>
+          </div>
+
+          <h1 class="text_float_hero font-extrabold text-6xl mb-6"><?php the_field('page_subtitle'); ?></h1>
+
+          <div
+            class="icon_rounded green w-[115px] h-[115px] bottom-[-50px] right-[35px] sm:right-[60px]">
+            <img
+              src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
+              alt="Vallarta Gay + Community Center" />
+          </div>
         </div>
-      </div>
-
-      <h1 class="text_float_hero font-extrabold text-6xl mb-6">
-        Contact & location
-      </h1>
-
-      <div
-        class="icon_rounded green w-[115px] h-[115px] bottom-[-50px] right-[35px] sm:right-[60px]">
-        <img
-          src="<?php bloginfo('template_url') ?>/imgs/logo-rounded.png"
-          alt="Vallarta Gay + Community Center" />
-      </div>
-    </div>
-  </section>
+      </section>
+  <?php
+    else :
+      echo '<p class="text-center">No tiene imagen destacada.</p>';
+    endif;
+  } else {
+    echo '<p>Página no encontrada.</p>';
+  }
+  ?>
 
   <section class="container_main">
     <div class="max-w-[768px] px-4 mx-auto text-center mb-12">
-      <h2 class="text_ttl font-bold mb-1">Always Here for You</h2>
-      <p class="text_subttl font-semibold mb-2 max-w-[820px] mx-auto">
-        Whether you’re seeking guidance, support, or simply connection,
-        we’re here for you.
+      <h2 class="text_ttl font-bold mb-1"><?php echo function_exists('pll__') ? pll__('Contact') : 'Contact'; ?> </h2>
+      <p class="ext_subttl font-semibold mb-2 max-w-[820px] mx-auto">
+        <?php echo function_exists('pll__') ? pll__('Whether you’re seeking guidance') : 'Whether you’re seeking guidance'; ?>
       </p>
     </div>
 
@@ -47,10 +63,12 @@ get_header();
       class="drawer_contact border-t-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[30px] 2xl:gap-[75px] lg:gap-[100px] pt-12">
       <div class="w-full mb-4">
         <h6 class="font-bold tracking-[5px] text_mini mb-4 uppercase">
-          our location
+          <?php echo function_exists('pll__') ? pll__('our_location') : 'our_location'; ?>
         </h6>
+
         <p class="font-bold text-xl">
-          <a href="#">Morelos #101 Local 3B Centro, Puerto Vallarta</a>
+          <a href="<?php echo company_data('direccion_url'); ?>" target="_blank"><?php echo company_data('direccion'); ?></a>
+        </p>
         </p>
       </div>
       <div class="w-full mb-4">
@@ -58,49 +76,48 @@ get_header();
           WhatsApp
         </h6>
         <p class="flex items-center gap-1 text-xl font-bold">
-          <span><i class="ri-whatsapp-line"></i></span><a href="#">(+52) 322 128 6793</a>
-        </p>
-      </div>
-      <div class="w-full mb-4">
-        <h6 class="font-semibold tracking-[5px] text_mini mb-3 uppercase">
-          Work hours
-        </h6>
-        <p class="flex flex-col sm:flex-row items-center sm:gap-10 gap-1 text-xl font-bold mb-2">
-          <span class="w-full">Monday - Friday</span><span class="w-full">10:00am - 8:00pm</span>
-        </p>
-        <p class="flex flex-col sm:flex-row items-center sm:gap-10 gap-1 text-xl font-bold">
-          <span class="w-full">Saturday</span><span class="w-full">10:00am - 4:00pm</span>
+          <span><i class="ri-whatsapp-line"></i></span><a target="_blank" href="<?php echo company_data('whatsapp_url'); ?>">
+              <?php echo company_data('whatsapp'); ?>
+            </a>
         </p>
       </div>
       <div class="w-full mb-4">
         <h6 class="font-bold tracking-[5px] text_mini mb-3 uppercase">
-          Email
+          <?php echo function_exists('pll__') ? pll__('Workhours') : 'Workhours'; ?>
+        </h6>
+        <p class="flex items-center sm:gap-10 gap-3 mb-2  text-xl font-bold">
+
+          <span class="w-full"> <?php echo function_exists('pll__') ? pll__('L-V') : 'L-V'; ?></span><span class="w-full"><?php echo company_data("lunes_a_viernes") ?></span>
+        </p>
+        <p class="flex items-center sm:gap-10 gap-3 text-xl font-bold">
+          <span class="w-full"> <?php echo function_exists('pll__') ? pll__('S') : 'S'; ?></span><span class="w-full"><?php echo company_data("sabado") ?></span>
+        </p>
+
+      </div>
+      <div class="w-full mb-4">
+        <h6 class="font-bold tracking-[5px] text_mini mb-3 uppercase">
+          <?php echo function_exists('pll__') ? pll__('email_title') : 'email_title'; ?>
         </h6>
         <p class="flex items-center gap-1 text-xl font-bold">
-          <span><i class="ri-whatsapp-line"></i></span><a href="mailto:info@vallartagaycc.org">info@vallartagaycc.org</a>
+          <a href="mailto: <?php echo company_data('email'); ?>"> <?php echo company_data('email'); ?></a>
         </p>
       </div>
       <div class="w-full mb-4">
         <h6 class="font-bold tracking-[5px] text_mini mb-3 uppercase">
-          Social media
+          <?php echo function_exists('pll__') ? pll__('lets_social') : 'Lets social'; ?>
         </h6>
         <p class="flex items-center gap-1 text-xl font-bold">
-          <span>Follow Us</span>
+          <span> <?php echo function_exists('pll__') ? pll__('Follow Us') : 'Follow Us'; ?></span>
           <a
-            href="http://"
-            class="c_orange"
+            href="<?php echo company_data('facebook_url'); ?>"
+            class="flex gap-2 items-center c_orange"
             target="_blank"
-            rel="noopener noreferrer"><i class="text-3xl ri-facebook-box-fill"></i></a>
+            rel="noopener noreferrer"><span><i class="text-3xl ri-facebook-box-fill"></i></span></a>
           <a
-            href="http://"
-            class="c_orange"
+            href="<?php echo company_data('instagram_url'); ?>"
+            class="flex gap-2 items-center c_orange"
             target="_blank"
-            rel="noopener noreferrer"><i class="text-3xl ri-instagram-line"></i></a>
-          <a
-            href="http://"
-            class="c_orange"
-            target="_blank"
-            rel="noopener noreferrer"><i class="text-3xl ri-tiktok-fill"></i></a>
+            rel="noopener noreferrer"><span><i class="text-3xl ri-instagram-line"></i></span></a>
         </p>
       </div>
     </div>

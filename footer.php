@@ -4,55 +4,60 @@
       class="box_footer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 2xl:gap-[175px] lg:gap-[100px] items-cenxter">
       <div class="w-full mb-4">
         <h6 class="font-semibold tracking-[5px] text_mini mb-4 uppercase">
-          our location
+          <?php echo function_exists('pll__') ? pll__('our_location') : 'our_location'; ?>
         </h6>
         <p>
-          <a href="#">Morelos #101 Local 3B Centro, Puerto Vallarta</a>
+          <a href="<?php echo company_data('direccion_url'); ?>" target="_blank"><?php echo company_data('direccion'); ?></a>
         </p>
       </div>
       <div class="w-full mb-4">
+        <h6 class="font-semibold tracking-[5px] text_mini mb-3 uppercase">
+
+          <?php echo function_exists('pll__') ? pll__('Workhours') : 'Workhours'; ?>
+
+        </h6>
+        <p class="flex items-center sm:gap-10 gap-3 mb-2">
+
+          <span class="w-full"> <?php echo function_exists('pll__') ? pll__('L-V') : 'L-V'; ?></span><span class="w-full"><?php echo company_data("lunes_a_viernes") ?></span>
+        </p>
+        <p class="flex items-center sm:gap-10 gap-3">
+          <span class="w-full"> <?php echo function_exists('pll__') ? pll__('S') : 'S'; ?></span><span class="w-full"><?php echo company_data("sabado") ?></span>
+        </p>
+      </div>
+      <div class="w-full">
         <h6 class="font-semibold tracking-[5px] text_mini mb-4 uppercase">
-          Let's social
+
+          <?php echo function_exists('pll__') ? pll__('lets_social') : 'Lets social'; ?>
         </h6>
         <p class="text-lg">
           <a
-            href="#"
+            href="<?php echo company_data('facebook_url'); ?>"
             class="flex gap-2 items-center"
             target="_blank"
             rel="noopener noreferrer"><span><i class="text-2xl ri-facebook-box-fill"></i></span><span class="">Facebook</span></a>
         </p>
         <p class="text-lg">
           <a
-            href="#"
+            href="<?php echo company_data('instagram_url'); ?>"
             class="flex gap-2 items-center"
             target="_blank"
             rel="noopener noreferrer"><span><i class="text-2xl ri-instagram-line"></i></span><span class="">Instagram</span></a>
         </p>
-        <p class="text-lg">
+        <!-- <p class="text-lg">
           <a
             href="#"
             class="flex gap-2 items-center"
             target="_blank"
             rel="noopener noreferrer"><span><i class="text-2xl ri-tiktok-fill"></i></span><span class="">Tiktok</span></a>
-        </p>
+        </p> -->
       </div>
-      <div class="w-full">
-        <h6 class="font-semibold tracking-[5px] text_mini mb-3 uppercase">
-          Work hours
-        </h6>
-        <p class="flex items-center sm:gap-10 gap-3 mb-2">
-          <span class="w-full">Monday - Friday</span><span class="w-full">10:00am - 8:00pm</span>
-        </p>
-        <p class="flex items-center sm:gap-10 gap-3">
-          <span class="w-full">Saturday</span><span class="w-full">10:00am - 4:00pm</span>
-        </p>
-      </div>
+
     </div>
     <div
       class="box_footer_bottom border-t-[2px] py-3 flex flex-col sm:flex-row gap-1 items-center justify-between text_mini">
-      <p>Copyright © 2025 Vallarta Gay + Community Center.</p>
+      <p>Copyright © 2026 Vallarta Gay + Community Center.</p>
       <p class="flex gap-3">
-        <a href="#">Privacy Policy</a> <a href="#">Aviso de Privacidad</a>
+        <a href="#"><?php echo function_exists('pll__') ? pll__('privacy_policy') : 'Privacy policy'; ?></a>
       </p>
     </div>
   </div>

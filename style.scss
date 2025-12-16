@@ -1,10 +1,16 @@
+/*
+Theme Name: Vallarta Gay + Community Center
+Author: Alex P. Montero, Vallarta Gay + Community Center
+Description: Nueva versión 2025 del Sitio Vallarta Gay + Community Center
+Version: 1.0
+*/
+
 :root {
   --font-montserrat: "Montserrat", sans-serif;
   --color-primary: #5452a5;
   --color-secundary: #3c3a8f;
   --color-orange: #ff6628;
   --color-yellow: #faa419;
-  // --color-yellow: #d9cb51;
   --color-green: #006a31;
   --color-morado: #6e2996;
   --color-bg: #e9e9ff;
@@ -97,6 +103,23 @@ button {
   }
   &.mini_primary {
     background: var(--color-primary);
+  }
+}
+
+.page-numbers {
+  cursor: pointer;
+  background: #d7d7ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  font-weight: 500;
+  border: 3px solid transparent;
+  border-radius: 0.55rem;
+  &.current {
+    border: 2px solid var(--color-primary);
+    font-weight: 600;
   }
 }
 
@@ -213,22 +236,24 @@ button {
   .item_team {
     background-color: #ffffff;
     box-shadow: 1px 1px 32px rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
     gap: 1rem;
     padding: 1.5rem;
     border-radius: 10rem 1rem 1rem 1rem;
     position: relative;
+    & > .relative {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 15px;
+    }
     .names_team {
-      max-width: 350px;
+      max-width: 300px;
       margin-top: 3rem;
-      margin-left: 3rem;
       margin-bottom: 0.75rem;
     }
-    .picture_team {
-      right: 50px;
+    .picture_team_img {
       height: 225px;
+      right: 0;
     }
     .info_personal {
       background-color: var(--color-primary);
@@ -600,7 +625,7 @@ button {
       display: flex;
       justify-content: space-between;
       gap: 15px;
-      .picture_press img{
+      .picture_press img {
         border-radius: 0.75rem;
         width: 150px;
         height: 150px;
@@ -650,7 +675,7 @@ button {
       }
     }
     .up_pt2 {
-      .picture_up img{
+      .picture_up img {
         border-radius: 0.75rem;
         width: 125px;
         min-width: 125px;
@@ -692,6 +717,9 @@ button {
           background-color: #f5f5f5;
           font-size: 0.9rem;
           border-radius: 0.75rem;
+          p {
+            margin-bottom: 1rem;
+          }
         }
         .icon {
           background-color: #d9cb51;
@@ -838,12 +866,13 @@ button {
         background: rgb(255, 255, 255);
         text-shadow: none;
         color: #333333;
+        border-radius: 1rem 1rem 10rem 1rem;
       }
       .box_picture_press {
         position: relative;
         z-index: 1;
         img {
-          border-radius: 1rem 1rem 1rem 10rem;
+          border-radius: 1rem;
           object-fit: cover;
           max-height: 400px;
         }
@@ -896,11 +925,14 @@ button {
     }
   }
   .picture_team {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 315px;
-    border-bottom-right-radius: 1rem;
+    img {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 315px;
+      width: auto;
+      border-bottom-right-radius: 1rem;
+    }
   }
   &.directors {
     background-color: #5452a5;

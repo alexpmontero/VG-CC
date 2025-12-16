@@ -7,7 +7,6 @@
         <h6
           class="text_mini c_marin font-bold tracking-[7px] mb-6 lg:mb-18">
           <?php echo function_exists('pll__') ? pll__('WELCOME') : 'WELCOME'; ?>
-
         </h6>
 
         <?php
@@ -299,12 +298,12 @@
             ?>
             <div
               class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]" style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');">
-              <span class="ico_service"><i class="<?php echo wp_strip_all_tags(get_the_excerpt(), true); ?>"></i></span>
+              <span class="ico_service"><i class="<?php the_field('icon'); ?>"></i></span>
               <div>
                 <h2 class="font-extrabold text-2xl md:text-3xl">
                   <?php the_title(); ?>
                 </h2>
-                <div class="font-normal my-1"><?php the_content(); ?></div>
+                <div class="font-normal my-1"><?php the_field('slogan'); ?></div>
                 <div class="">
                   <button class="btn btn_border wht trans">
                     <span><?php echo function_exists('pll__') ? pll__('Learn More') : 'Learn More'; ?></span>
@@ -373,9 +372,9 @@
                 </h5>
                 <div class="flex items-center justify-between gap-5">
                   <div class="text-sm text-gray-400">
-                    <i class="ri-calendar-line"></i> <?php echo wp_strip_all_tags(get_the_excerpt(), true); ?>
+                    <i class="ri-calendar-line"></i> <?php echo wp_strip_all_tags(get_the_content(), true); ?>
                   </div>
-                  <a href="<?php echo wp_strip_all_tags(get_the_content(), true); ?>" target="_blank" class="btn_mini mini_orange trans">
+                  <a href="<?php echo wp_strip_all_tags(get_the_excerpt(), true); ?>" target="_blank" class="btn_mini mini_orange trans">
                     <i class="ri-arrow-right-line"></i>
                   </a>
                 </div>
@@ -398,24 +397,35 @@
       <div
         class="flex mb-4 justify-between md:items-center flex-col sm:flex-row gap-5">
         <div class="">
-          <h2 class="text_ttl font-bold mb-1">Upcoming Events</h2>
+          <h2 class="text_ttl font-bold mb-1"><?php echo function_exists('pll__') ? pll__('Upcoming Events') : 'Upcoming Events'; ?></h2>
         </div>
         <button class="btn btn_border wht trans">
-          <span>Upcoming experiences</span>
+          <span><?php echo function_exists('pll__') ? pll__('Upcoming experiences') : 'Upcoming experiences'; ?></span>
           <span class="ico_btn">
             <i class="ri-arrow-right-line"></i>
           </span>
         </button>
       </div>
       <div class="box_items_upcoming">
-
-
-
         <?php
+
+
         $args = [
           'posts_per_page' => 3,
           'post_type'      => 'post',
-          'category_name'  => 'events', // Slug de la categoría
+          'paged'          => $paged,
+          'category_name'  => 'events',
+          'meta_key'       => 'fecha_de_evento',
+          'orderby'        => 'meta_value',
+          'order'          => 'ASC',
+          'meta_query'     => [
+            [
+              'key'     => 'fecha_de_evento',
+              'value'   => date('Ymd'),
+              'compare' => '>=',
+              'type'    => 'NUMERIC',
+            ],
+          ],
         ];
 
         $query = new WP_Query($args);
@@ -425,19 +435,33 @@
             $query->the_post();
         ?>
 
+            <?php
+            $fecha = get_field('fecha_de_evento');
+
+            if ($fecha) {
+              $date = DateTime::createFromFormat('Ymd', $fecha);
+
+              $dia  = $date->format('d');
+              $mes  = $date->format('M');
+              $anio = $date->format('Y');
+            }
+            ?>
 
             <div class="item_upcoming grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div class="up_pt1 flex gap-3 md:gap-12 items-start">
                 <div class="data_event">
-                  <span>Nov</span><span class="num">28</span><span>2025</span>
+                  <span><?php echo esc_html($mes); ?></span>
+                  <span class="num"><?php echo esc_html($dia); ?></span>
+                  <span><?php echo esc_html($anio); ?></span>
                 </div>
+
                 <div>
                   <h2 class="font-semibold text-2xl">
                     <?php the_title(); ?>
                   </h2>
                   <p class="font-medium text-lg italic">
                     <span><i class="ri-map-pin-2-line"></i></span>
-                    <span><?php echo wp_strip_all_tags(get_the_excerpt(), true); ?></span>
+                    <span> <?php the_field('address'); ?></span>
                   </p>
                 </div>
               </div>
@@ -470,6 +494,7 @@
           echo '<p>No se encontraron publicaciones".</p>';
         }
         ?>
+
       </div>
     </div>
     <h2
@@ -478,117 +503,7 @@
     </h2>
   </section>
 
-  <section class="wrapper_faqs sm:mb-22 mb-18">
-    <div class="box_faqs">
-      <h2 class="text_ttl font-bold mb-1 text-center">General Questions</h2>
-      <p
-        class="text_subttl font-semibold mb-2 text-center mb-5 sm:mb-12 max-w-[820px] mx-auto">
-        Have questions or want to book an appointment? — we’re here for you!
-      </p>
-      <div
-        class="faqs_contact flex flex-col sm:flex-row justify-center gap-3">
-        <div class="item_faqs_contact">
-          <p class="text-center font-semibold mb-2">
-            Send us a message on WhatsApp
-          </p>
-          <button class="btn btn_border trans !font-normal mx-auto">
-            <span class="font-semibold">(+52) 322 128 6793</span>
-            <span class="ico_btn">
-              <i class="ri-whatsapp-line"></i>
-            </span>
-          </button>
-        </div>
-        <div class="item_faqs_contact">
-          <p class="text-center font-semibold mb-2">Send us an email.</p>
-          <button class="btn btn_border trans !font-normal mx-auto">
-            <span class="font-semibold">info@vallartagaycc.com</span>
-            <span class="ico_btn">
-              <i class="ri-mail-line"></i>
-            </span>
-          </button>
-        </div>
-      </div>
-      <div
-        id="accordion"
-        class="content_accord_item_faqs w-full max-w-3xl mx-auto">
-        <!-- ITEM 1 -->
-        <div class="accrdn_item_faqs">
-          <button
-            class="accordion-header cursor-pointer w-full flex justify-between items-center py-4 text-left"
-            data-index="0">
-            <span class="text-lg font-semibold">What if I can’t afford the suggested donation?</span>
-            <span class="icon text-2xl font-bold select-none">−</span>
-          </button>
-
-          <div
-            class="accordion-content overflow-hidden max-h-[500px] transition-all duration-300">
-            <div class="p-3">
-              At the Vallarta Gay+ Community Center, we are committed to
-              serving everyone in our community. While suggested donations
-              help support our health and wellness programs, we understand
-              that not everyone can contribute financially. If you’re unable
-              to make a donation, please let us know. We assess each
-              situation individually and will waive fees as needed to ensure
-              you receive the PrEP and PEP services you need. No one is
-              turned away due to inability to pay; everyone is welcome here.
-              Our tests and other medications are priced at a low cost to
-              make it affordable; we are not able to provide these
-              completely free at this time.
-            </div>
-          </div>
-        </div>
-
-        <!-- ITEM 2 -->
-        <div class="accrdn_item_faqs">
-          <button
-            class="accordion-header cursor-pointer w-full flex justify-between items-center py-4 text-left"
-            data-index="1">
-            <span class="text-lg font-semibold">What is the purpose of the Vallarta Gay+ Community
-              Center?</span>
-            <span class="icon text-2xl font-bold select-none">+</span>
-          </button>
-
-          <div
-            class="accordion-content overflow-hidden max-h-0 transition-all duration-300">
-            <div class="p-3">
-              The Vallarta Gay+ Community Center is a nonprofit organization
-              dedicated to fostering empowerment, health, and wellness
-              within the LGBTQ+ community. We provide equitable access to
-              healthcare, education, and support services, with focused care
-              for the prevention and treatment of HIV and STIs. We advocate
-              for our community’s equity and inclusion as a vital component
-              of our region’s diverse society, providing a safe and
-              inclusive environment to drive positive change locally and
-              beyond.
-            </div>
-          </div>
-        </div>
-
-        <!-- ITEM 3 -->
-        <div class="accrdn_item_faqs">
-          <button
-            class="accordion-header cursor-pointer w-full flex justify-between items-center py-4 text-left"
-            data-index="2">
-            <span class="text-lg font-semibold">What should I bring for my first visit?</span>
-            <span class="icon text-2xl font-bold select-none">+</span>
-          </button>
-
-          <div
-            class="accordion-content overflow-hidden max-h-0 transition-all duration-300">
-            <div class="p-3">
-              For your first visit, it’s recommended to bring a valid ID and
-              any relevant medical records. If you’re seeking specific
-              services like PrEP, ensure you have any necessary
-              documentation or information that might assist in your
-              evaluation. It’s also advisable to bring a form of payment for
-              any suggested donations associated with the services you plan
-              to utilize.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <?php include get_template_directory() . '/faqs.php'; ?>
 
   <?php include get_template_directory() . '/pre-footer.php'; ?>
 
