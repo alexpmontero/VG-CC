@@ -124,8 +124,8 @@ get_header();
                   target="_blank"
                   class="btn btn_orange mt-5 mb-1">
                   <span>
-                   <?php echo function_exists('pll__') ? pll__('Donate Now') : 'Donate Now'; ?>
-                  
+                    <?php echo function_exists('pll__') ? pll__('Donate Now') : 'Donate Now'; ?>
+
                   </span>
                   <span class="ico_btn">
                     <i class="ri-arrow-right-line"></i>
@@ -243,8 +243,9 @@ get_header();
         </div>
       </div>
     </div>
+  </div>
 
-    <?php include get_template_directory() . '/pre-footer.php'; ?>
+  <?php include get_template_directory() . '/pre-footer.php'; ?>
 
 </main>
 
