@@ -140,82 +140,82 @@ get_header();
             class="tab-content hidden flex justify-center items-center"
             data-content="2">
             <div class="w-full max-w-[768px] text-center mx-auto">
-              <p class="text_mini font-semibold c_orange">Payable To:</p>
+              <p class="text_mini font-semibold c_orange"><?php echo function_exists('pll__') ? pll__('payable_to') : 'payable_to'; ?>:</p>
               <h3 class="text-2xl font-semibold mb-2">
-                US-Mexico Border Philanthropy Partnership
+                <?php echo donate_usa_info("check_payable_to") ?>
               </h3>
 
-              <p class="text_mini font-semibold c_orange mt-8">Mail To:</p>
+              <p class="text_mini font-semibold c_orange mt-8"><?php echo function_exists('pll__') ? pll__('mail_to') : 'mail_to'; ?>:</p>
               <h3 class="text-md font-semibold mb-2">
-                US-Mexico Border Philanthropy Partnership Attn: Fiscal
-                Sponsorship Services / Vallarta Gay+ Community Center 2508
-                Historic Decatur Rd., Suite 130 San Diego, CA 92106
+                <?php echo donate_usa_info("check_mail_to") ?>
               </h3>
             </div>
           </div>
 
           <div
-            class="tab-content hidden flex justify-center items-center"
+            class="tab-content hidden flex justify-center items-center "
             data-content="3">
             <div
-              class="w-full max-w-[1240px] gap-15 grid grid-cols-1 md:grid-cols-2">
+              class="w-full max-w-[1240px] gap-15 grid grid-cols-1 md:grid-cols-2 py-4 md:py-14">
               <div class="w-full">
                 <p class="text_mini font-semibold c_orange mb-2">
-                  Beneficiary Bank Information
+                  <?php echo function_exists('pll__') ? pll__('beneficiary_bank_information') : 'beneficiary_bank_information'; ?>
                 </p>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>Bank Country:</span>
-                  <span class="font-semibold">USA</span>
+                  <span><?php echo function_exists('pll__') ? pll__('bank_country') : 'bank_country'; ?>: </span>
+                  <span class="font-semibold"> <?php echo donate_usa_info("bank_country") ?>
+                  </span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span> Bank Name:</span>
-                  <span class="font-semibold">Citibank</span>
+                  <span><?php echo function_exists('pll__') ? pll__('bank_name') : 'bank_name'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_usa_info("bank_name") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>Address:</span>
-                  <span class="font-semibold">352 H. Street Chula Vista, CA 91911</span>
+                  <span> <?php echo function_exists('pll__') ? pll__('address') : 'address'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_usa_info("address") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span> ABA Routing Number:</span>
-                  <span class="font-semibold">322271724</span>
+                  <span> <?php echo function_exists('pll__') ? pll__('aba_routing_number') : 'aba_routing_number'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_usa_info("aba_routing_number") ?></span>
                 </h3>
               </div>
               <div class="w-full">
                 <p class="text_mini font-semibold c_orange mb-2">
-                  Beneficiary Information:
+                  <?php echo function_exists('pll__') ? pll__('beneficiary_information') : 'beneficiary_information'; ?>
+
                 </p>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>Account Name::</span>
+
+                  <span> <?php echo function_exists('pll__') ? pll__('account_name') : 'account_name'; ?>:</span>
+
                   <span class="font-semibold">
-                    US-Mexico Border Philanthropy Partnership</span>
+                    <?php echo donate_usa_info("account_name") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span> Address:</span>
-                  <span class="font-semibold">2508 Historic Decatur Rd. Suite 130, San Diego, CA
-                    92106</span>
+                  <span> <?php echo function_exists('pll__') ? pll__('address') : 'address'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_usa_info("address") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>Bank Account Number:</span>
-                  <span class="font-semibold">205332877</span>
+                  <span> <?php echo function_exists('pll__') ? pll__('account_number') : 'account_number'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_usa_info("bank_account_number_beneficiary") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
                   <span>SWIFT Code:</span>
-                  <span class="font-semibold">CITIUS33</span>
+                  <span class="font-semibold"><?php echo donate_usa_info("swift_code") ?></span>
                 </h3>
               </div>
               <div class="w-full col-span-2">
                 <p
                   class=" text-lg md:text-2xl font-semibold mb-1 text-center c_orange">
-                  If you have any questions regarding payments in the U.S. or
-                  need more information, please contact:
+                  <?php echo function_exists('pll__') ? pll__('If you have any questions') : 'text_info_f'; ?>
                 </p>
 
                 <div class="w-full text-center ">

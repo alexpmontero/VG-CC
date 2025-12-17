@@ -43,13 +43,7 @@
             target="_blank"
             rel="noopener noreferrer"><span><i class="text-2xl ri-instagram-line"></i></span><span class="">Instagram</span></a>
         </p>
-        <!-- <p class="text-lg">
-          <a
-            href="#"
-            class="flex gap-2 items-center"
-            target="_blank"
-            rel="noopener noreferrer"><span><i class="text-2xl ri-tiktok-fill"></i></span><span class="">Tiktok</span></a>
-        </p> -->
+      
       </div>
 
     </div>

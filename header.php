@@ -45,7 +45,7 @@
             'show_flags' => 0,
             'show_names' => 0,
             'display_names_as' => 'slug',
-            'raw' => 1 // Importantísimo para personalizar
+            'raw' => 1
           ));
 
           if (!empty($languages)) {
@@ -63,13 +63,21 @@
         }
         ?>
 
-        <div class="flex gap-5">
+        <div class="flex gap-3">
           <span class="flex gap-1 items-center"><i class="text-lg ri-mail-fill"></i>
-            <a href="mailto:info@vallartagaycc.org">info@vallartagaycc.org</a></span>
-          <span class="flex gap-3">
-            <a href="http://" target="_blank" rel="noopener noreferrer"><i class="text-lg ri-facebook-box-fill"></i></a>
-            <a href="http://" target="_blank" rel="noopener noreferrer"><i class="text-lg ri-instagram-line"></i></a>
-            <a href="http://" target="_blank" rel="noopener noreferrer"><i class="text-lg ri-tiktok-fill"></i></a>
+            <a href="mailto: <?php echo company_data('email'); ?>"> <?php echo company_data('email'); ?></a>
+          </span>
+          <span class="flex gap-2">
+            <a
+              href="<?php echo company_data('facebook_url'); ?>"
+              class="flex gap-2 items-center"
+              target="_blank"
+              rel="noopener noreferrer"><span><i class="text-lg ri-facebook-box-fill"></i></span></a>
+            <a
+              href="<?php echo company_data('instagram_url'); ?>"
+              class="flex gap-2 items-center"
+              target="_blank"
+              rel="noopener noreferrer"><span><i class="text-lg ri-instagram-line"></i></span></a>
           </span>
         </div>
       </div>
@@ -77,76 +85,33 @@
     <div class="h_bottom">
       <div class="contain_b">
         <div class="box_brand">
-          <img class="trans" src="<?php bloginfo('template_url') ?>/imgs/logo-vgcc.png" alt="" />
+          <a href="<?php echo esc_url( home_url('/') ); ?>">
+            <img class="trans" src="<?php bloginfo('template_url') ?>/imgs/logo-vgcc.png" alt="" />
+          </a>
         </div>
         <nav
           class="box_nav select-none flex gap-2 lg:gap-[8px] xl:gap-[20px]">
-          <a href="#" class="item_dropdown">Home</a>
-          <div class="item_dropdown relative dropdown">
-            <button class="dropdown-btn flex items-center gap-1 transition">
-              <span>About</span>
-              <svg
-                class="w-4 h-4 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-
-            <div
-              class="dropdown-menu absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-xl opacity-0 invisible scale-95 transition-all duration-200 origin-top">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 1</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 2</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 3</a>
-            </div>
-          </div>
-          <div class="item_dropdown relative dropdown">
-            <button class="dropdown-btn flex items-center gap-1 transition">
-              <span>Services</span>
-              <svg
-                class="w-4 h-4 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-
-            <div
-              class="dropdown-menu absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-xl opacity-0 invisible scale-95 transition-all duration-200 origin-top">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 1</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 2</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 3</a>
-            </div>
-          </div>
-          <div class="item_dropdown relative dropdown">
-            <button class="dropdown-btn flex items-center gap-1 transition">
-              <span>Community</span>
-              <svg
-                class="w-4 h-4 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-
-            <div
-              class="dropdown-menu absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-xl opacity-0 invisible scale-95 transition-all duration-200 origin-top">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 1</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 2</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Opción 3</a>
-            </div>
-          </div>
-          <a href="#" class="">Activities</a>
+          <?php
+          wp_nav_menu([
+            'theme_location' => 'menu',
+            'menu' => pll_current_language() === 'es' ? 'Main Menu ES' : 'Main Menu EN',
+            'container'      => false,
+            'items_wrap'     => '%3$s',
+            'walker'         => new Tailwind_Dropdown_Walker(),
+          ]);
+          ?>
         </nav>
         <div class="links flex gap-2">
-          <a href="#" class="btn btn_border trans !pr-3">
-            <span>Connect with Us</span>
+
+          <?php
+            $page_id = pll_get_post(17); // ID base
+          ?>
+          <a href="<?php echo get_permalink($page_id); ?>" class="btn btn_border trans !pr-3">
+            <span><?php echo function_exists('pll__') ? pll__('Connect with Us') : 'btn_connect_with_us'; ?></span>
           </a>
+
           <button class="btn btn_orange trans" data-drawer-trigger>
-            <span>I Give Now</span>
+            <span> <?php echo function_exists('pll__') ? pll__('I Give Now') : 'btn_give_now'; ?></span>
             <span class="ico_btn">
               <i class="ri-arrow-right-line"></i>
             </span>
@@ -160,8 +125,8 @@
       </div>
     </div>
 
- 
 
-  <?php include get_template_directory() . '/aside-donate.php'; ?>
-      
+
+    <?php include get_template_directory() . '/aside-donate.php'; ?>
+
   </header>

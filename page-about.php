@@ -90,9 +90,9 @@ get_header();
       </div>
     </div>
 
-    <div class="drawer_mission lg:mb-24 mb-14">
+    <div class="drawer_mission lg:mb-24 mb-1">
       <div
-        class="content_about flex justify-center lg:flex-row gap-x-5 md:gap-x-18">
+        class="content_about flex justify-center items-center lg:flex-row gap-x-5 md:gap-x-18">
 
         <?php
         $args = array(
@@ -120,16 +120,21 @@ get_header();
               <div class="font-medium mb-6">
                 <?php the_excerpt(); ?>
               </div>
-              <button class="btn btn_primary trans">
-                <span>Let's talk</span>
-                <span class="ico_btn">
+
+              <?php
+              $page_id = pll_get_post(15); // ID base
+              ?>
+              <a href="<?php echo get_permalink($page_id); ?>" class="btn btn_primary trans w-fit">
+                <span><?php echo function_exists('pll__') ? pll__('Meet our team') : 'btn_meet_team'; ?></span>
+                  <span class="ico_btn">
                   <i class="ri-arrow-right-line"></i>
                 </span>
-              </button>
+              </a>
+
             </div>
 
             <div style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');"
-              class="picture_about rounded-2xl rounded-bl-[1rem] lg:rounded-bl-[8rem] md:object-cover w-full  h-full sm:h-[350px] lg:h-[500px] min-w-[325px] bg-cover bg-center"></div>
+              class="picture_about rounded-2xl rounded-bl-[1rem] lg:rounded-bl-[8rem] md:object-cover w-full h-full sm:h-[350px] lg:h-[500px] min-w-[325px] bg-cover bg-center hidden lg:block"></div>
 
         <?php endwhile;
           wp_reset_postdata();

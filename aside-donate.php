@@ -16,50 +16,67 @@
          <div
            class="relative z-1 text-center w-full max-w-[480px] mx-auto text-white">
            <h4 class="text-xl sm:text-3xl font-bold mb-2">
-             Your support strengthens our community
+             <!-- Your support strengthens our community -->
+             <?php echo function_exists('pll__') ? pll__('Your support strengthens our community') : 'title_aside_donate'; ?>
            </h4>
            <p class="pb-1">
-             Your donation helps us promote health, wellness, and empowerment
+             <!-- Your donation helps us promote health, wellness, and empowerment
              within the LGBTQ+ community. We offer tax-deductible receipts in
-             Mexico and the U.S. through the Border Philanthropy Partnership.
+             Mexico and the U.S. through the Border Philanthropy Partnership. -->
+
+             <?php echo function_exists('pll__') ? pll__('Your donation helps us promote health') : 'title_aside_a'; ?>
            </p>
          </div>
        </div>
        <div class="mx-auto max-w-[460px] mt-6 sm:mt-12 pl-4 pr-4">
          <h5 class="text-center text-xl mb-12 sm:mb-20 font-bold">
-           Please choose the donation option that best fits your needs:
+           <!-- Please choose the donation option that best fits your needs: -->
+           <?php echo function_exists('pll__') ? pll__('Please choose the donation option') : 'title_aside_b'; ?>
          </h5>
          <div class="box_banderas">
-           <a href="donate-usa.html" class="item_bandera">
+
+
+           <?php
+            $page_id = pll_get_post(23); // ID base
+            ?>
+           <a href="<?php echo get_permalink($page_id); ?>" class="item_bandera">
              <img
                class="pic_bandera"
                src="<?php bloginfo('template_url') ?>/imgs/bandera-usa.png"
                alt="donation in USA" />
              <div>
-               <h5 class="font-bold text-2xl c_marin">USA</h5>
-               <p class="text-sm">
-                 I’d like to receive a U.S. tax-deductible receipt.
+               <h5 class="font-bold text-2xl c_marin">
+                 <?php echo function_exists('pll__') ? pll__('USA') : 'title_aside_usa'; ?>
+               </h5>
+               <p class="text-sm leading-4">
+
+                 <?php echo function_exists('pll__') ? pll__('I’d like to receive a U.S. tax-deductible receipt.') : 'title_aside_c'; ?>
                </p>
              </div>
            </a>
-           <a href="donate-mex.html" class="item_bandera">
+
+           <?php
+            $page_id = pll_get_post(25); // ID base
+            ?>
+           <a href="<?php echo get_permalink($page_id); ?>" class="item_bandera">
              <img
                class="pic_bandera"
                src="<?php bloginfo('template_url') ?>/imgs/bandera-mex.png"
                alt="donation in USA" />
              <div>
-               <h5 class="font-bold text-2xl c_marin">MEXICO</h5>
-               <p class="text-sm">
-                 I’d like to receive a tax-deductible receipt or invoice in
-                 Mexico.
+               <h5 class="font-bold text-2xl c_marin"><?php echo function_exists('pll__') ? pll__('MEX') : 'title_aside_mex'; ?></h5>
+               <p class="text-sm leading-4">
+                 <?php echo function_exists('pll__') ? pll__('like to receive') : 'title_aside_d'; ?>
                </p>
              </div>
            </a>
+
          </div>
 
          <h5 class="text-center text-xl mt-10 sm:mt-14 font-bold">
-           Thank you for being part of this movement for inclusion, health,
-           and care. 💜
+
+           <?php echo function_exists('pll__') ? pll__('Thank you for being') : 'title_aside_e'; ?>
+           💜
          </h5>
        </div>
      </div>

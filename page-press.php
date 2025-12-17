@@ -38,7 +38,7 @@ $posts_per_page = 17;
         <div class="container_main relative">
           <div
             class="drawer_hero_page in_press"
-            style="background-image: url(<?php bloginfo('template_url') ?>/imgs/pages/bg_press.jpg)">
+            style="background-image: url(<?php bloginfo('template_url') ?>/imgs/bg_press.jpg)">
 
             <div class="box_ttl_hero_page">
               <h3 class="font-extrabold text-xl md:text-2xl lg:text-3xl mb-4">
@@ -48,7 +48,7 @@ $posts_per_page = 17;
                 <?php echo get_the_content(); ?>
               </div>
               <p>
-                <a href="<?php echo esc_url(wp_strip_all_tags(get_the_excerpt(), true)); ?>" target="_blank" class="btn btn_border trans w-42">
+                <a href="<?php echo esc_url(wp_strip_all_tags(get_the_excerpt(), true)); ?>" target="_blank" class="btn btn_border trans w-fit">
                   <span><?php echo function_exists('pll__') ? pll__('Learn More') : 'Learn More'; ?></span>
                   <span class="ico_btn">
                     <i class="ri-arrow-right-line"></i>

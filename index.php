@@ -51,17 +51,16 @@
         ?>
 
         <div class="">
-          <button class="btn btn_primary trans">
+          <a href="<?php echo esc_url(pll_home_url() . '#services'); ?>" class="btn btn_primary trans w-fit">
             <span><?php echo function_exists('pll__') ? pll__('Our services') : 'Our services'; ?></span>
             <span class="ico_btn">
               <i class="ri-arrow-right-line"></i>
             </span>
-          </button>
-
+          </a>
         </div>
       </div>
       <div
-        class="drawer_hero_picture"
+        class="drawer_hero_picture vegas_hero"
         id="vegas_hero"
         style="background-image: url(<?php bloginfo('template_url') ?>/imgs/bg_hero01.jpg)">
 
@@ -122,7 +121,7 @@
       <div
         class="about_pt2 flex flex-col md:flex-row gap-[20px] md:gap-[100px] xl:gap-[340px] md:items-end relative z-1">
         <img
-          src="<?php bloginfo('template_url') ?>/imgs/bg_sala.png"
+          src="<?php bloginfo('template_url') ?>/imgs/bg_donar.png"
           class="object-cover w-full h-[225px] md:h-[150px] md:w-[180px] md:h-[250px] rounded-2xl"
           alt="" />
         <div class="md:max-w-[380px] mb-4">
@@ -132,15 +131,17 @@
             <?php echo function_exists('pll__') ? pll__('Together, we’re building') : 'Together, we’re building'; ?>
 
           </p>
-          <button class="btn btn_border trans">
-            <span>
 
-              <?php echo function_exists('pll__') ? pll__('Discover Who We Are') : 'Discover Who We Are'; ?>
-            </span>
+          <?php
+          $page_id = pll_get_post(13); // ID base
+          ?>
+          <a href="<?php echo get_permalink($page_id); ?>" class="btn btn_border trans w-fit ">
+            <span> <?php echo function_exists('pll__') ? pll__('Discover Who We Are') : 'Discover Who We Are'; ?></span>
             <span class="ico_btn">
               <i class="ri-arrow-right-line"></i>
             </span>
-          </button>
+          </a>
+
         </div>
       </div>
       <img
@@ -154,7 +155,7 @@
     </div>
   </section>
 
-  <section class="wrapper_carousel_partners sm:mb-22 mb-18">
+  <section id="allies" class="wrapper_carousel_partners sm:mb-22 mb-18">
 
     <?php
     $args = array(
@@ -215,7 +216,7 @@
     </div>
   </section>
 
-  <section class="wrapper_activities sm:mb-32 mb-18">
+  <section id="activities" class="wrapper_activities sm:mb-32 mb-18">
     <div class="container_main">
       <h2 class="text_ttl font-bold mb-1 text-center"><?php echo function_exists('pll__') ? pll__('Activities') : 'Activities'; ?> </h2>
       <p class="text_subttl font-semibold mb-2 text-center mb-6">
@@ -267,7 +268,7 @@
     </div>
   </section>
 
-  <section class="wrapper_services_home sm:mb-22 mb-18">
+  <section id="services" class="wrapper_services_home sm:mb-22 mb-18">
     <div class="container_main">
       <h2 class="text_ttl font-bold mb-2 text-center">
         <?php echo function_exists('pll__') ? pll__('Services') : 'Services'; ?>
@@ -338,12 +339,17 @@
             <?php echo function_exists('pll__') ? pll__('text_press_home') : 'text_press_home'; ?>
           </p>
         </div>
-        <button class="btn btn_secundary trans bg-red-200 min-w-[160px]">
+
+        <?php
+        $page_id = pll_get_post(21); // ID base
+        ?>
+        <a href="<?php echo get_permalink($page_id); ?>" class="btn btn_secundary trans min-w-[160px] w-fit">
           <span><?php echo function_exists('pll__') ? pll__('Learn More') : 'Learn More'; ?></span>
           <span class="ico_btn">
             <i class="ri-arrow-right-line"></i>
           </span>
-        </button>
+        </a>
+
       </div>
       <div
         class="box_items_press grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 gap-6">
@@ -399,12 +405,16 @@
         <div class="">
           <h2 class="text_ttl font-bold mb-1"><?php echo function_exists('pll__') ? pll__('Upcoming Events') : 'Upcoming Events'; ?></h2>
         </div>
-        <button class="btn btn_border wht trans">
+
+        <?php
+        $page_id = pll_get_post(19); // ID base
+        ?>
+        <a href="<?php echo get_permalink($page_id); ?>" class="btn btn_border wht trans min-w-[160px] w-fit">
           <span><?php echo function_exists('pll__') ? pll__('Upcoming experiences') : 'Upcoming experiences'; ?></span>
           <span class="ico_btn">
             <i class="ri-arrow-right-line"></i>
           </span>
-        </button>
+        </a>
       </div>
       <div class="box_items_upcoming">
         <?php
@@ -513,13 +523,13 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    menuMovil();
+    menuMovil?.();
+    isDropdown?.();
+    accordion?.();
+    drawerInit?.();
+    headerOnScroll?.();
+    vegasHero?.();
     splidePartners();
     splideActivities();
-    accordion();
-    vegasHero();
-    isDropdown();
-    headerOnScroll();
-    drawerInit();
   });
 </script>

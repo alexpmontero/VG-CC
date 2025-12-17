@@ -85,7 +85,7 @@ get_header();
           <button
             class="tab-btn p-4 text-xl cursor-pointer bg-white w-full"
             data-tab="1">
-                <?php echo function_exists('pll__') ? pll__('Wire transfer') : 'Wire transfer'; ?>
+            <?php echo function_exists('pll__') ? pll__('Wire transfer') : 'Wire transfer'; ?>
           </button>
         </div>
 
@@ -98,44 +98,45 @@ get_header();
               class="w-full max-w-[1240px] gap-8 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 py-12">
               <h3
                 class="col-span-1 lg:col-span-2 mb-1 flex justify-center text-center flex-col">
-                <span> Account name:</span>
+                <span> Account name</span>
+
                 <span class="font-semibold c_orange text-2xl">
-                  Alianza Fronteriza de Filantropía, A.C.</span>
+                  <!-- Alianza Fronteriza de Filantropía, A.C. -->
+                  <?php echo donate_mex_info("account_name") ?>
+                </span>
               </h3>
 
               <div class="w-full">
                 <h3 class="text-lg mb-1 flex gap-0 flex-col">
-                  <span>Address:</span>
-                  <span class="font-semibold">Ave. 20 de Noviembre #4305 Fracc. El Colegio Cd.
-                    Juárez, Chihuahua C.P. 32310</span>
+                  <span><?php echo function_exists('pll__') ? pll__('address') : 'address'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_mex_info("address") ?></span>
                 </h3>
               </div>
               <div class="w-full">
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>Bank:</span>
-                  <span class="font-semibold">BBVA</span>
+                  <span><?php echo function_exists('pll__') ? pll__('bank') : 'bank'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_mex_info("bank") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>Account number: </span>
-                  <span class="font-semibold">0115967627</span>
+                  <span><?php echo function_exists('pll__') ? pll__('account_number') : 'account_number'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_mex_info("account_number") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>Standardized Bank Code:</span>
-                  <span class="font-semibold">012150001159676277</span>
+                  <span><?php echo function_exists('pll__') ? pll__('standardized_bank_code') : 'standardized_bank_code'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_mex_info("standardized_bank_code") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>Branch:</span>
-                  <span class="font-semibold">5412 Chihuahua Plaza Monarca Location (plaza):
-                    Chihuahua, Chih., México</span>
+                  <span><?php echo function_exists('pll__') ? pll__('branch') : 'branch'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_mex_info("branch") ?></span>
                 </h3>
                 <h3
                   class="text-lg mb-1 flex gap-0 flex-col md:gap-1 md:flex-row">
-                  <span>SWIFT/BIC:</span>
-                  <span class="font-semibold">BCMRMXMMPYM</span>
+                  <span><?php echo function_exists('pll__') ? pll__('swift_bic') : 'swift_bic'; ?>:</span>
+                  <span class="font-semibold"><?php echo donate_mex_info("swift_bic") ?></span>
                 </h3>
               </div>
 
@@ -143,39 +144,49 @@ get_header();
 
               <p
                 class="col-span-1 lg:col-span-2 text-lg md:text-2xl font-semibold mb-1 text-center">
-                If the amount is in US dollars but the payment is made in
+                <!-- If the amount is in US dollars but the payment is made in
                 pesos to our account in Mexico, please use the official
                 exchange rate published by government sources (Diario
-                Oficial / Banxico) on the day of the deposit.
+                Oficial / Banxico) on the day of the deposit. -->
+                <?php echo function_exists('pll__') ? pll__('If the amount is in US') : 'If the amount is in US'; ?>
+
               </p>
               <p class="col-span-1 lg:col-span-2 text-center c_green font-medium">
-                To request your CFDI (recibo deducible del ISR), please send
+                <!-- To request your CFDI (recibo deducible del ISR), please send
                 the deposit or transfer receipt along with the following
-                documentation/information to matt_karimi@sbcglobal.net:
+                documentation/information to matt_karimi@sbcglobal.net: -->
+                <?php echo function_exists('pll__') ? pll__('To request your CFDI') : 'To request your CFDI'; ?>
+
               </p>
               <div class="col-span-1 lg:col-span-2 my-5">
                 <div
                   class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-10">
                   <p
                     class="font-semibold w-full text-center border-2 p-3 rounded-xl">
-                    Tax status certificate (constancia de situación fiscal)
-                    – not older than two months
+                    <!-- Tax status certificate (constancia de situación fiscal)
+                    – not older than two months -->
+                    <?php echo function_exists('pll__') ? pll__('Tax status certificate') : 'Tax status certificate'; ?>
                   </p>
                   <p
                     class="font-semibold w-full text-center border-2 p-3 rounded-xl">
-                    CFDI usage/payment method (uso de CFDI/método de pago)
+                    <!-- CFDI usage/payment method (uso de CFDI/método de pago) -->
+                    <?php echo function_exists('pll__') ? pll__('CFDI usage/payment') : 'CFDI usage/payment'; ?>
+
                   </p>
                   <p
                     class="font-semibold w-full text-center border-2 p-3 rounded-xl">
-                    Contact person’s name
+                    <!-- Contact person’s name -->
+                    <?php echo function_exists('pll__') ? pll__('Contact person’s name') : 'Contact person’s name'; ?>
                   </p>
                 </div>
               </div>
               <hr class="col-span-1 lg:col-span-2 border-gray-300" />
               <p
                 class="col-span-1 lg:col-span-2 text-lg md:text-2xl font-semibold mb-1 text-center">
-                If you have any questions regarding payments in the U.S. or
-                need more information, please contact:
+                <!-- If you have any questions regarding payments in the U.S. or
+                need more information, please contact: -->
+                <?php echo function_exists('pll__') ? pll__('If you have any questions') : 'text_info_f'; ?>
+
               </p>
 
               <div class="w-full text-center col-span-1 lg:col-span-2">

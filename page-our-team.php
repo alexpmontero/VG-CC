@@ -9,7 +9,7 @@ get_header();
 
   <?php
   // Obtener la página por su slug
-  $page = get_page_by_path('about');
+  $page = get_page_by_path('our-team');
 
   if ($page) {
     // Obtener la URL de la imagen destacada

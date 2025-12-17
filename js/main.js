@@ -1,25 +1,34 @@
 function menuMovil() {
-  const btnMenu = document.querySelector(".btn_movil");
+  const btnMenus = document.querySelectorAll(".btn_movil, .links_nav");
   const boxNav = document.querySelector(".box_nav");
   const icoOpen = document.querySelector(".icon_open");
   const icoClose = document.querySelector(".icon_close");
 
-  btnMenu.addEventListener("click", () => {
-    boxNav.classList.toggle("active");
+  // 🛡️ Blindaje
+  if (!btnMenus.length || !boxNav || !icoOpen || !icoClose) return;
+
+  // 🔁 Todos los botones disparan el mismo toggle
+  btnMenus.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      boxNav.classList.toggle("active");
+    });
   });
 
+  // 👁️ Observer para sincronizar iconos
   const observer = new MutationObserver(() => {
-    if (boxNav.classList.contains("active")) {
-      icoOpen.classList.replace("block", "hidden");
-      icoClose.classList.replace("hidden", "block");
-    } else {
-      // nav cerrado
-      icoClose.classList.replace("block", "hidden");
-      icoOpen.classList.replace("hidden", "block");
-    }
+    const isOpen = boxNav.classList.contains("active");
+
+    icoOpen.classList.toggle("hidden", isOpen);
+    icoOpen.classList.toggle("block", !isOpen);
+
+    icoClose.classList.toggle("hidden", !isOpen);
+    icoClose.classList.toggle("block", isOpen);
   });
 
-  observer.observe(boxNav, { attributes: true });
+  observer.observe(boxNav, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
 }
 
 function splidePartners() {
@@ -106,7 +115,7 @@ function accordion() {
 }
 
 function vegasHero() {
-  $("#vegas_hero").vegas({
+  $(".vegas_hero").vegas({
     // overlay: "./imgs/overlays/05.png",
     timer: false,
     delay: 8000,
@@ -273,9 +282,8 @@ function modalTeam() {
   const modalImage = document.getElementById("modalImage");
   const modalBody = document.getElementById("modalBody");
 
-  document.querySelectorAll(".openModal").forEach(btn => {
+  document.querySelectorAll(".openModal").forEach((btn) => {
     btn.addEventListener("click", () => {
-
       modalName.textContent = btn.dataset.name;
       modalRole.textContent = btn.dataset.role;
       modalImage.src = btn.dataset.image;
@@ -306,7 +314,7 @@ function modalTeam() {
   closeModal.addEventListener("click", closeModalFn);
   overlay.addEventListener("click", closeModalFn);
 
-  document.addEventListener("keydown", e => {
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeModalFn();
   });
 }
