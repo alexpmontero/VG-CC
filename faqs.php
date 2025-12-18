@@ -12,23 +12,27 @@
           <p class="text-center font-semibold mb-2">
             <?php echo function_exists('pll__') ? pll__('Send WhatsApp') : 'Send WhatsApp'; ?>
           </p>
-          <button class="btn btn_border trans !font-normal mx-auto">
-            <span class="font-semibold">(+52) 322 128 6793</span>
+
+
+
+          <a href="<?php echo company_data('whatsapp_url'); ?>" target="_blank" class="btn btn_border trans !font-normal mx-auto w-fit">
+            <span class="font-semibold"><?php echo company_data('whatsapp'); ?></span>
             <span class="ico_btn">
               <i class="ri-whatsapp-line"></i>
             </span>
-          </button>
+          </a>
         </div>
         <div class="item_faqs_contact">
           <p class="text-center font-semibold mb-2">
             <?php echo function_exists('pll__') ? pll__('Send email') : 'Send email'; ?>
           </p>
-          <button class="btn btn_border trans !font-normal mx-auto">
-            <span class="font-semibold">info@vallartagaycc.com</span>
+
+          <a href="mailto:<?php echo company_data('email'); ?>" class="btn btn_border trans !font-normal mx-auto">
+            <span class="font-semibold"><?php echo company_data('email'); ?></span>
             <span class="ico_btn">
               <i class="ri-mail-line"></i>
             </span>
-          </button>
+          </a>
         </div>
       </div>
 

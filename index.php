@@ -294,11 +294,10 @@
             $query->the_post();
         ?>
             <?php
-            // Obtener imagen destacada
-            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+            $thumbnail_image = get_field('thumbnail_image');
             ?>
             <div
-              class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]" style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');">
+              class="item_service_home trans h-full sm:min-h-[250px] md:min-h-[380px] lg:min-h-[450px]" style="background-image: url('<?= esc_url($thumbnail_image['url']); ?>');">
               <span class="ico_service"><i class="<?php the_field('icon'); ?>"></i></span>
               <div>
                 <h2 class="font-extrabold text-2xl md:text-3xl">
@@ -306,12 +305,12 @@
                 </h2>
                 <div class="font-normal my-1"><?php the_field('slogan'); ?></div>
                 <div class="">
-                  <button class="btn btn_border wht trans">
+                  <a href="<?php the_permalink(); ?>" class="btn btn_border wht trans w-fit">
                     <span><?php echo function_exists('pll__') ? pll__('Learn More') : 'Learn More'; ?></span>
                     <span class="ico_btn">
                       <i class="ri-arrow-right-line"></i>
                     </span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -322,9 +321,9 @@
           echo '<p>No se encontraron publicaciones".</p>';
         }
         ?>
-
       </div>
     </div>
+
   </section>
 
   <?php include get_template_directory() . '/donations.php'; ?>
@@ -481,12 +480,12 @@
                     <?php the_content(); ?>
                   </div>
                   <p>
-                    <button class="btn btn_secundary trans">
+                    <a href="<?php the_permalink(); ?>" class="btn btn_secundary trans w-fit">
                       <span><?php echo function_exists('pll__') ? pll__('Learn More') : 'Learn More'; ?></span>
                       <span class="ico_btn">
                         <i class="ri-arrow-right-line"></i>
                       </span>
-                    </button>
+                    </a>
                   </p>
                 </div>
                 <div class="picture_up">
@@ -501,7 +500,7 @@
           }
           wp_reset_postdata();
         } else {
-          echo '<p>No se encontraron publicaciones".</p>';
+          echo '<p class="text-center py-6">No se encontraron publicaciones".</p>';
         }
         ?>
 
@@ -523,6 +522,42 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+
+    function vegasHero() {
+      $(".vegas_hero").vegas({
+        timer: false,
+        delay: 8000,
+        slidesToKeep: 1,
+        transition: "fade2",
+        transitionDuration: 5000,
+        animation: "random",
+        animationDuration: 8000,
+        slides: [
+          <?php
+          $query_slides = new WP_Query([
+            'category_name'  => 'hero-picture',
+            'posts_per_page' => 5,
+            'post_status'    => 'publish',
+          ]);
+
+          $slides = [];
+          if ($query_slides->have_posts()) :
+            while ($query_slides->have_posts()) :
+              $query_slides->the_post();
+              $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+              if ($image_url) {
+                $slides[] = '{ src: "' . esc_url($image_url) . '" }';
+              }
+            endwhile;
+            wp_reset_postdata();
+          endif;
+
+          echo implode(',', $slides);
+          ?>
+        ],
+      });
+    }
+
     menuMovil?.();
     isDropdown?.();
     accordion?.();

@@ -918,10 +918,16 @@ button {
 }
 
 .page_single .wrapper_single {
-  margin-top: 4rem;
+  margin-top: 6rem;
 }
 .page_single .wrapper_single .drawer_single .content_single p {
   margin-bottom: 1rem;
+}
+.page_single .wrapper_single .drawer_single .box_picture_single img {
+  border-radius: 1rem;
+  width: auto;
+  margin: 0 auto;
+  max-height: 750px;
 }
 .page_single .wrapper_aside .box_links_services {
   background-color: #ffffff;
@@ -942,6 +948,7 @@ button {
 }
 .page_single .wrapper_aside .box_links_services .item_link_services .picture_service {
   width: 80px;
+  min-width: 80px;
   height: 80px;
   -o-object-fit: cover;
   object-fit: cover;

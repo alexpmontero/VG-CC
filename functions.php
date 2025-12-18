@@ -95,6 +95,8 @@ add_action('init', function () {
 
     // TITULOS ==
     pll_register_string('title_welcome', 'WELCOME', 'TitleVGCC');
+    pll_register_string('title_ready_book', 'Ready to book your appointment?', 'TitleVGCC');
+    pll_register_string('title_more_service', 'More service', 'TitleVGCC');
     pll_register_string('title_activities', 'Activities', 'TitleVGCC');
     pll_register_string('title_services', 'Services', 'TitleVGCC');
     pll_register_string('title_press', 'Press', 'TitleVGCC');

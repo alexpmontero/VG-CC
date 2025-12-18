@@ -114,24 +114,6 @@ function accordion() {
   contents[0].style.maxHeight = contents[0].scrollHeight + "px";
 }
 
-function vegasHero() {
-  $(".vegas_hero").vegas({
-    // overlay: "./imgs/overlays/05.png",
-    timer: false,
-    delay: 8000,
-    slidesToKeep: 1,
-    transition: "fade2",
-    transitionDuration: 5000,
-    animation: "random",
-    animationDuration: 8000,
-    slides: [
-      { src: "./imgs/bg_hero01.jpg" },
-      { src: "./imgs/bg_hero02.jpg" },
-      { src: "./imgs/bg_hero03.webp" },
-    ],
-  });
-}
-
 function isDropdown() {
   const dropdowns = document.querySelectorAll(".dropdown");
 

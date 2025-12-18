@@ -984,11 +984,19 @@ button {
 
 .page_single {
   .wrapper_single {
-    margin-top: 4rem;
+    margin-top: 6rem;
     .drawer_single {
       .content_single {
         p {
           margin-bottom: 1rem;
+        }
+      }
+      .box_picture_single {
+        img {
+          border-radius: 1rem;
+          width: auto;
+          margin: 0 auto;
+          max-height: 750px;
         }
       }
     }
@@ -1013,6 +1021,7 @@ button {
         }
         .picture_service {
           width: 80px;
+          min-width: 80px;
           height: 80px;
           -o-object-fit: cover;
           object-fit: cover;
